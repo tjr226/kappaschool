@@ -2,6 +2,9 @@ const express = require('express');
 
 const helmet = require('helmet');
 
+const authRouter = require('../auth/auth_router.js')
+
+// const restrictedMiddleware = require('../auth/restricted_middleware.js');
 
 const server = express();
 
@@ -14,6 +17,8 @@ const server = express();
 
 server.use(express.json());
 server.use(helmet());
+
+server.use('/api/auth', authRouter)
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: "API is working" });
