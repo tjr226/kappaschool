@@ -19,23 +19,17 @@ async function add(user_card) {
     return findByUserId(user_card.user_id);
 }
 
-// IN PROGRESS
 async function addLectureSegmentCardsToUser(lecture_segment_id, user_id) {
     cards = await db('cards').where('lecture_segment_id', lecture_segment_id)
         for (i = 0; i < cards.length; i++) {
-            // console.log(cards[i])
-            // console.log(i.id)
-            // console.log(cards[i].id)
             new_user_card = {};
             new_user_card.user_id = user_id;
             new_user_card.card_id = cards[i].id
             new_user_card.hidden_boolean = 0
             new_user_card.unix_timestamp = 0
-            console.log(new_user_card)
             await db('user_cards').insert(new_user_card)
 
         } 
-    // lecture_segment_cards = await db('cards').where('lecture_segment_id', lecture_segment_id)
     return cards 
 }
 
