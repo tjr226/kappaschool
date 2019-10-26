@@ -1,30 +1,27 @@
+// import libraries
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+// import components
 import Login from './Components/authComponents/Login.js';
 import Signup from './Components/authComponents/Signup.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Trig from './Components/trigComponents/Trig.js';
+
 
 import PrivateRoute from './PrivateRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Link to="/login">Log In</Link>
+      <br></br>
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/trig">Trig</Link>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/trig" component={Trig} />
+    </Router>
   );
-}
+};
 
 export default App;
