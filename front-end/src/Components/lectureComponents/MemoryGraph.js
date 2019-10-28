@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 class MemoryGraph extends React.Component {
 
-    
+
     componentDidMount() {
         this.props.getUserCards();
     };
@@ -17,6 +17,8 @@ class MemoryGraph extends React.Component {
             <div>
                 <h2>Graph Placeholder</h2>
                 <p>Total unhidden cards for current user: {this.props.userCardsList.length}</p>
+
+     
             </div>
         )
     }

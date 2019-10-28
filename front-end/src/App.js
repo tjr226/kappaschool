@@ -17,9 +17,11 @@ function App() {
       <br></br>
       <Link to="/signup">Sign Up</Link>
       <Link to="/lecture">Lecture Placeholder</Link>
+      <Link to="/trig">Trig Example</Link>
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <PrivateRoute exact path="/lecture" component={Lecture} />
+      <PrivateRoute exact path="/trig" component={Trig} />
     </Router>
   );
 };
