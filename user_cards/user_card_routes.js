@@ -3,13 +3,14 @@ const UserCards = require('./user_cards_model.js');
 
 // FIND UNHIDDEN CARDS BY USER ID
 router.get('/', (req, res) => {
-    const user_id = req.body.user_id;
-    UserCards.findUnhiddenCardsByUserId(user_id)
+    // const user_id = req.body.user_id;
+    // console.log(req.user)
+    UserCards.findUnhiddenCardsByUserId(req.user.user_id)
         .then(cards => {
             res.status(200).json(cards);
         })
         .catch(error => {
-            res.status(500).json({ errorMessage: "Could not access unhidden cards by user id."})
+            res.status(500).json({ errorMessage: "Could not access unhidden cards by user id." })
         })
 })
 
