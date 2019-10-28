@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Login from './Components/authComponents/Login.js';
 import Signup from './Components/authComponents/Signup.js';
 import Trig from './Components/trigComponents/Trig.js';
-
+import Lecture from './Components/lectureComponents/Lecture.js';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -16,10 +16,10 @@ function App() {
       <Link to="/login">Log In</Link>
       <br></br>
       <Link to="/signup">Sign Up</Link>
-      <Link to="/trig">Trig</Link>
-      <Route exact path="/" component={Login} />
+      <Link to="/lecture">Lecture Placeholder</Link>
+      <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
-      <Route exact path="/trig" component={Trig} />
+      <PrivateRoute exact path="/lecture" component={Lecture} />
     </Router>
   );
 };

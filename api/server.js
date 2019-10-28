@@ -9,12 +9,13 @@ const userCardRouter = require('../user_cards/user_card_routes.js')
 
 const server = express();
 
-// const cors = require('cors');
-// server.use(cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-// }
-// ));
+const cors = require('cors');
+server.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}
+));
+server.use(cors());
 
 server.use(express.json());
 server.use(helmet());
