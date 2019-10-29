@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const UserCards = require('./user_cards_model.js');
 
-// FIND UNHIDDEN CARDS BY USER ID
+// GET ALL UNHIDDEN CARDS BY USER ID
 router.get('/', (req, res) => {
     // const user_id = req.body.user_id;
     // console.log(req.user)
@@ -14,8 +14,25 @@ router.get('/', (req, res) => {
         })
 })
 
+// GET cards with lecture segment <= current lecture segment, and not hidden by the user
+// don't need lecture_id for Trig Demo
+router.get('/currentAndPreviousCardsForLectureSegment', (req, res) => {
+    const lecture_segment_id = req.body.lecture_segment_id
+    const user_id = req.user.user_id
+    UserCards.getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id)
+        .then(cards => {
+            res.status(200).json(cards);
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json(error)
+        })
+
+    
+})
+
 // ADD CARDS FROM LECTURE SEGMENT TO USER
-router.get('/addLectureSegmentCards', (req, res) => {
+router.post('/addLectureSegmentCards', (req, res) => {
     const user_id = req.body.user_id;
     const lecture_segment_id = req.body.lecture_segment_id;
     UserCards.addLectureSegmentCardsToUser(lecture_segment_id, user_id)
