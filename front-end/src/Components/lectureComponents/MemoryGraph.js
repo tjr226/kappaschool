@@ -9,14 +9,14 @@ class MemoryGraph extends React.Component {
 
 
     componentDidMount() {
-        this.props.getUserCards();
+
     };
 
     render() {
         return (
             <div>
                 <h2>Graph Placeholder</h2>
-                <p>Total unhidden cards for current user: {this.props.userCardsList.length}</p>
+                <p>PLACEHOLDER wait to improve until quiz sections are working</p>
 
      
             </div>

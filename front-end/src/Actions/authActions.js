@@ -6,6 +6,7 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 
 export const register = creds => dispatch => {
+
     dispatch({ type: REGISTER_START });
     return Axios.post('http://localhost:5000/api/auth/register', creds)
         .then(res => {
@@ -22,7 +23,10 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const login = creds => dispatch => {
+
     dispatch({ type: LOGIN_START });
+    // this gets sent to the Chrome console because ACTIONS are part of the front-end
+    console.log("creds in authActions", creds)
     return Axios.post('http://localhost:5000/api/auth/login', creds)
         .then(res => {
             localStorage.setItem('token', res.data.token);

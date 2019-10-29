@@ -21,6 +21,8 @@ router.post('/register', middleware.validateUser, (req, res) => {
 })
 
 router.post('/login', middleware.validateUser, (req, res) => {
+    console.log("login req.body", req.body)
+
     const { email, password } = req.body;
     Users.findBy({ email })
     .first()

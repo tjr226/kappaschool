@@ -16,9 +16,11 @@ router.get('/', (req, res) => {
 
 // GET cards with lecture segment <= current lecture segment, and not hidden by the user
 // don't need lecture_id for Trig Demo
-router.get('/currentAndPreviousCardsForLectureSegment', (req, res) => {
-    const lecture_segment_id = req.body.lecture_segment_id
+router.get('/currentAndPreviousCardsForLectureSegment/:lecture_segment_id', (req, res) => {
+    const lecture_segment_id = req.params.lecture_segment_id
+    console.log("in currentAndPrevCardsForLectureSegment route, lecture segment id is", lecture_segment_id)
     const user_id = req.user.user_id
+    console.log("user_id in current and prev is", user_id)
     UserCards.getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id)
         .then(cards => {
             res.status(200).json(cards);
@@ -27,11 +29,10 @@ router.get('/currentAndPreviousCardsForLectureSegment', (req, res) => {
             console.log(error)
             res.status(500).json(error)
         })
-
-    
 })
 
 // ADD CARDS FROM LECTURE SEGMENT TO USER
+// CHANGE THIS TO PARAMS
 router.post('/addLectureSegmentCards', (req, res) => {
     const user_id = req.body.user_id;
     const lecture_segment_id = req.body.lecture_segment_id;
