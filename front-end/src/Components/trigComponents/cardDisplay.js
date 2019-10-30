@@ -8,6 +8,7 @@ import styled from 'styled-components';
 const CardDisplayDiv = styled.div``
 
 
+
 class CardDisplay extends React.Component {
 
     render() {
@@ -16,6 +17,8 @@ class CardDisplay extends React.Component {
                 <p>Question is {this.props.card.card_question}</p>
                 <p>Answer is {this.props.card.card_answer}</p>
                 <p>Lecture segment is {this.props.card.lecture_segment_id}</p>
+                <button>didn't remember</button>
+                <button>remembered</button>
             </CardDisplayDiv>
         )
     }
