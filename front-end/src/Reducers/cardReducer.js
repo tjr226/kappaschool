@@ -3,6 +3,7 @@ import {
         GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_START,
         GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_SUCCESS,
         GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_FAILURE,
+    GET_USER_LECTURE_CARDS_START, GET_USER_LECTURE_CARDS_SUCCESS, GET_USER_LECTURE_CARDS_FAILURE,
     
 
 } from '../Actions/cardActions.js';
@@ -10,6 +11,8 @@ import {
 const initialCardState = {
     cardList: [],
     userCards: [],
+    userLectureCards: [],
+    gettingUserLectureCards: false,
     gettingCards: false,
     error: null,
 };
@@ -53,6 +56,24 @@ export const cardReducer = (state = initialCardState, action) => {
             return {
                 ...state,
                 gettingCards: false,
+                error: action.payload
+            }
+        case GET_USER_LECTURE_CARDS_START:
+            return {
+                ...state,
+                gettingUserLectureCards: true,
+                error: ''
+            }
+        case GET_USER_LECTURE_CARDS_SUCCESS:
+            return {
+                ...state,
+                gettingUserLectureCards: false,
+                userLectureCards: action.payload
+            }
+        case GET_USER_LECTURE_CARDS_FAILURE:
+            return {
+                ...state,
+                gettingUserLectureCards: false,
                 error: action.payload
             }
         default:

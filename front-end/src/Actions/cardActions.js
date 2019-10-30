@@ -35,3 +35,19 @@ export const getCurrentAndPreviousCardsForLectureSegment = input => dispatch => 
             dispatch({ type: GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_FAILURE, payload: err })
         })
 }
+
+export const GET_USER_LECTURE_CARDS_START = 'GET_USER_LECTURE_CARDS_START';
+export const GET_USER_LECTURE_CARDS_SUCCESS = 'GET_USER_LECTURE_CARDS_SUCCESS';
+export const GET_USER_LECTURE_CARDS_FAILURE = 'GET_USER_LECTURE_CARDS_FAILURE';
+
+export const getUserLectureCards = input => dispatch => {
+    const lecture_id = input
+    dispatch({ type: GET_USER_LECTURE_CARDS_START })
+    axiosWithAuth().get(`http://localhost:5000/api/user_cards/lecture/${lecture_id}`)
+        .then(res => {
+            dispatch({ type: GET_USER_LECTURE_CARDS_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: GET_USER_LECTURE_CARDS_FAILURE, payload: err})
+        })
+}
