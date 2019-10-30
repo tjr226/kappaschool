@@ -5,6 +5,7 @@ module.exports = {
     addLectureSegmentCardsToUser,
     find,
     findByUserCardId,
+    findByLectureId,
     findUnhiddenCardsByUserId,
     getCurrentAndPreviousCardsForLectureSegment,
     update,
@@ -53,6 +54,13 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
         .andWhere(function() {
             this.where('lecture_segment_id', '<=', lecture_segment_id)
         })
+}
+
+function findByLectureId(lecture_id, user_id) {
+    return db('user_cards')
+        .join('cards', 'user_cards.card_id', 'cards.id')
+        .join('lecture_segments', 'cards.lecture_segment_id', 'lecture_segments.id')
+        .where('lecture_id', lecture_id)
 }
 
 async function update(changes, id, user_id) {
