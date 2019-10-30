@@ -56,8 +56,8 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
         })
 }
 
+// NOTE: this query returns an object where "id" is a copy of "Lecture_id"
 function findByLectureId(lecture_id, user_id) {
-    // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
     return db('user_cards')
         .select([ 'user_cards.id as user_cards_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.unix_timestamp',
             'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',
