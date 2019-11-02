@@ -8,19 +8,37 @@ import { hideUserLectureCard } from '../../Actions/cardActions';
 
 // styled components
 const CardDisplayDiv = styled.div``
+const AnswerDiv = styled.div``
 
 class CardDisplay extends React.Component {
+    state = {
+        show_answer: 0,
+    }
     
     hideUserLectureCard = e => {
         e.preventDefault();
         this.props.hideUserLectureCard(this.props.card.user_card_id)
     }
 
+    showAnswer = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            show_answer: 1,
+        })
+    }
+
     render() {
         return (
             <CardDisplayDiv>
                 <p>Question is {this.props.card.card_question}</p>
-                <p>Answer is {this.props.card.card_answer}</p>
+                <AnswerDiv onClick={this.showAnswer}>
+                    {this.state.show_answer
+                        ? <p>Answer is {this.props.card.card_answer}</p>
+                        : <p> Click here to show the answer</p> 
+                    }
+                </AnswerDiv>
+                
                 <p>Lecture segment is {this.props.card.lecture_segment_id}</p>
                 <p>currently using cardDisplay.js</p>
                 <button>didn't remember</button>
