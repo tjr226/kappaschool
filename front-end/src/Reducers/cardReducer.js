@@ -4,6 +4,7 @@ import {
         GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_SUCCESS,
         GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_FAILURE,
     GET_USER_LECTURE_CARDS_START, GET_USER_LECTURE_CARDS_SUCCESS, GET_USER_LECTURE_CARDS_FAILURE,
+    HIDE_USER_LECTURE_CARD_START, HIDE_USER_LECTURE_CARD_SUCCESS, HIDE_USER_LECTURE_CARD_FAILURE,
     
 
 } from '../Actions/cardActions.js';
@@ -14,6 +15,7 @@ const initialCardState = {
     userLectureCards: [],
     gettingUserLectureCards: false,
     gettingCards: false,
+    hidingUserLectureCard: false,
     error: null,
 };
 
@@ -74,6 +76,25 @@ export const cardReducer = (state = initialCardState, action) => {
             return {
                 ...state,
                 gettingUserLectureCards: false,
+                error: action.payload
+            }
+        // NOTE: HideUserLectureCards will almost certainly need to be changed
+        // It hides the cards in the database, but does not update the data on the page
+        case HIDE_USER_LECTURE_CARD_START:
+            return {
+                ...state,
+                hidingUserLectureCard: true,
+                error: ''
+            }
+        case HIDE_USER_LECTURE_CARD_SUCCESS:
+            return {
+                ...state,
+                hidingUserLectureCard: false,
+            }
+        case HIDE_USER_LECTURE_CARD_FAILURE:
+            return {
+                ...state,
+                hidingUserLectureCard: false,
                 error: action.payload
             }
         default:

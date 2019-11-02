@@ -51,3 +51,19 @@ export const getUserLectureCards = input => dispatch => {
             dispatch({ type: GET_USER_LECTURE_CARDS_FAILURE, payload: err})
         })
 }
+
+export const HIDE_USER_LECTURE_CARD_START = 'HIDE_USER_LECTURE_CARD_START';
+export const HIDE_USER_LECTURE_CARD_SUCCESS = 'HIDE_USER_LECTURE_CARD_SUCCESS';
+export const HIDE_USER_LECTURE_CARD_FAILURE = 'HIDE_USER_LECTURE_CARD_FAILURE';
+
+export const hideUserLectureCard = input => dispatch => {
+    const user_lecture_card_id = input
+    dispatch({ type: HIDE_USER_LECTURE_CARD_START })
+    axiosWithAuth().put(`http://localhost:5000/api/user_cards/${user_lecture_card_id}/hideCard`)
+        .then(res => {
+            dispatch({ type: HIDE_USER_LECTURE_CARD_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: HIDE_USER_LECTURE_CARD_FAILURE, payload: err })
+        })
+}

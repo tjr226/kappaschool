@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import { getUserCards } from '../../Actions';
-
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 class MemoryGraph extends React.Component {
 

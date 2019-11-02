@@ -1,3 +1,9 @@
+// 
+// 
+// NOT USING THIS as of november 2, 2019
+// 
+
+
 // imported libraries
 import React from 'react';
 import styled from 'styled-components';
@@ -15,10 +21,10 @@ class CardQuiz extends React.Component {
     render() {
         return (
             <CardQuizDiv>
-                <p>question: {this.props.card.card_question} </p>
-                <p>answer: {this.props.card.card_answer}</p>
-                <button>didn't remember</button>
-                <button>remembered</button>
+                {/* <p>question: {this.props.card.card_question} </p> */}
+                {/* <p>answer: {this.props.card.card_answer}</p> */}
+                {/* <button>didn't remember</button> */}
+                {/* <button>remembered</button> */}
             </CardQuizDiv>
         )
     }
