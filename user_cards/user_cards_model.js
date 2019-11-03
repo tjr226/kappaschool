@@ -7,6 +7,7 @@ module.exports = {
     findByUserCardId,
     findByLectureId,
     findUnhiddenCardsByUserId,
+    hideCard,
     getCurrentAndPreviousCardsForLectureSegment,
     update,
     remove
@@ -58,6 +59,26 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
 
 // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
 function findByLectureId(lecture_id, user_id) {
+    return db('user_cards')
+        .select([ 'user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
+            'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',
+            'lecture_segments.id as lecture_segment_id', 'lecture_segments.lecture_id as lecture_id'
+        ])
+        .join('cards', 'user_cards.card_id', 'cards.id')
+        .join('lecture_segments', 'cards.lecture_segment_id', 'lecture_segments.id')
+        .where('user_id', user_id)
+        .where('lecture_id', lecture_id)
+}
+
+// this function was built instead of using the update() function to hide individual cards
+// first section is copying the update() functionality to modify the database
+// second section is to return the same results as "find by lecture id"
+// main change from update... need to add lecture_id to the hide_card function
+// in this function, id is the user_card id
+async function hideCard(changes, id, user_id, lecture_id) {
+    await db('user_cards')
+        .where({ id })
+        .update(changes)
     return db('user_cards')
         .select([ 'user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
             'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',

@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import { axiosWithAuth } from '../axiosWithAuth.js'
 
 export const REGISTER_START = 'REGISTER_START';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

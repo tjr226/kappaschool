@@ -1,65 +1,28 @@
 import {
-    GET_USER_CARDS_START, GET_USER_CARDS_SUCCESS, GET_USER_CARDS_FAILURE,
-        GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_START,
-        GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_SUCCESS,
-        GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_FAILURE,
     GET_USER_LECTURE_CARDS_START, GET_USER_LECTURE_CARDS_SUCCESS, GET_USER_LECTURE_CARDS_FAILURE,
     HIDE_USER_LECTURE_CARD_START, HIDE_USER_LECTURE_CARD_SUCCESS, HIDE_USER_LECTURE_CARD_FAILURE,
+    GET_CARDS_FOR_QUIZ_START, GET_CARDS_FOR_QUIZ_SUCCESS, GET_CARDS_FOR_QUIZ_FAILURE,
     
 
 } from '../Actions/cardActions.js';
 
 const initialCardState = {
-    cardList: [],
-    userCards: [],
+    // There are two lists being used
+    // first is userLectureCards, all the cards for this user and lecture
+    // second is cardsForQuiz
+    // the goal is to continuously update userLectureCards and have it match the database
+    // while we use the cardsForQuiz to create individual quizzes
+    // that way we can hide cards in the quiz, without triggering a refresh of the data behind each lecture segment quiz
     userLectureCards: [],
+    cardsForQuiz: [],
     gettingUserLectureCards: false,
-    gettingCards: false,
+    gettingCardsForQuiz: false,
     hidingUserLectureCard: false,
     error: null,
 };
 
 export const cardReducer = (state = initialCardState, action) => {
     switch (action.type) {
-        case GET_USER_CARDS_START:
-            return {
-                ...state,
-                gettingCards: true,
-                error: ''
-            }
-        case GET_USER_CARDS_SUCCESS:
-            return {
-                ...state,
-                gettingCards: false,
-                cardList: action.payload,
-                error: ''
-            }
-        case GET_USER_CARDS_FAILURE:
-            return {
-                ...state,
-                gettingCards: false,
-                userCards: [],
-                error: action.payload
-            }
-        case GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_START:
-            return {
-                ...state,
-                gettingCards: true,
-                cardList: [],
-                error: ''
-            }
-        case GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_SUCCESS:
-            return {
-                ...state,
-                gettingCards: false,
-                cardList: action.payload
-            }
-        case GET_CURRENT_AND_PREVIOUS_CARDS_FOR_LECTURE_SEGMENT_FAILURE:
-            return {
-                ...state,
-                gettingCards: false,
-                error: action.payload
-            }
         case GET_USER_LECTURE_CARDS_START:
             return {
                 ...state,
@@ -90,12 +53,31 @@ export const cardReducer = (state = initialCardState, action) => {
             return {
                 ...state,
                 hidingUserLectureCard: false,
+                userLectureCards: action.payload
             }
         case HIDE_USER_LECTURE_CARD_FAILURE:
             return {
                 ...state,
                 hidingUserLectureCard: false,
                 error: action.payload
+            }
+        case GET_CARDS_FOR_QUIZ_START:
+            return {
+                ...state,
+                gettingCardsForQuiz: true,
+                error: ''
+            }
+        case GET_CARDS_FOR_QUIZ_SUCCESS:
+            return {
+                ...state,
+                gettingCardsForQuiz: false,
+                cardsForQuiz: action.payload
+            }
+        case GET_CARDS_FOR_QUIZ_FAILURE:
+            return {
+                ...state,
+                gettingCardsForQuiz: false,
+                error: action.payload,
             }
         default:
             return state;

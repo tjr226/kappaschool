@@ -14,13 +14,14 @@ router.get('/', (req, res) => {
         })
 })
 
-router.put('/:user_card_id/hideCard', (req, res) => {
+router.put('/:user_card_id/lecture/:lecture_id/hideCard', (req, res) => {
+    const lecture_id = req.params.lecture_id;
     const user_card_id = req.params.user_card_id;
     const user_id = req.user.user_id;
     const changes = { hidden_boolean: 1 };
-    UserCards.update(changes, user_card_id, user_id)
-        .then(card => {
-            res.status(200).json(card);
+    UserCards.hideCard(changes, user_card_id, user_id, lecture_id)
+        .then(response => {
+            res.status(200).json(response);
         })
         .catch(error => {
             res.status(500).json(error);
