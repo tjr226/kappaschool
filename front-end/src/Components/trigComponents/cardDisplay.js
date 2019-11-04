@@ -29,8 +29,14 @@ class CardDisplay extends React.Component {
     }
 
     render() {
+        console.log("card display props")
+        console.log(this.props)
+        if (!this.props.card) {
+            return <div />
+        }
         return (
             <CardDisplayDiv>
+                <p>card display div</p>
                 <p>Question is {this.props.card.card_question}</p>
                 <AnswerDiv onClick={this.showAnswer}>
                     {this.state.show_answer
