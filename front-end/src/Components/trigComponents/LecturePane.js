@@ -7,6 +7,8 @@ import { getUserLectureCards } from '../../Actions';
 // imported components
 import LectureSection1 from './LectureSection1';
 import LectureSectionOne from './LectureSectionOne';
+import LectureSectionTwo from './LectureSectionTwo';
+import LectureSectionThree from './LectureSectionThree';
 
 // styled components
 const LecturePaneDiv = styled.div`
@@ -31,6 +33,8 @@ class LecturePane extends React.Component {
                 <h1>Trig Lecture placeholder</h1>
                 {/* <LectureSection1 /> */}
                 <LectureSectionOne />
+                <LectureSectionTwo />
+                <LectureSectionThree />
             </LecturePaneDiv>
         )
     }
