@@ -88,10 +88,14 @@ class LectureSection1 extends React.Component {
                                     {/* KEY here is used to render new component for each new card number. */}
                                     {/* If there's no KEY, the child component state won't change, which is needed to hide and unhide answers */}
                                     <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
-                                    <button onClick={this.increaseCardNumberDidNotRemember}>Didn't remember</button>
+                                    <button 
+                                        className="btn btn-secondary"
+                                        onClick={this.increaseCardNumberDidNotRemember}>
+                                        
+                                        Didn't remember</button>
                                     <button
-                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}
-                                    >
+                                        className="btn btn-secondary"
+                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}>
                                         Remembered
                                     </button>
                                 </div>
