@@ -8,7 +8,7 @@ import { getCardsForQuiz } from '../../Actions';
 
 // imported components
 import CardDisplay from './cardDisplay';
-import QuizComponent from './QuizComponent';
+// import QuizComponent from './QuizComponent';
 
 // styled components
 const LectureSection1Div = styled.div``
@@ -20,7 +20,7 @@ class LectureSection1 extends React.Component {
         lecture_segment_id: 1,
         lecture_id: 1,
         show_quiz: 0,
-        // card_number: 0,
+        card_number: 0,
     }
 
     showQuiz = async e => {
@@ -30,6 +30,13 @@ class LectureSection1 extends React.Component {
         this.setState({
             ...this.state,
             show_quiz: 1
+        })
+    }
+
+    increaseCardNumber() {
+        this.setState({
+            ...this.state,
+            card_number: this.state.card_number + 1
         })
     }
 
@@ -47,6 +54,7 @@ class LectureSection1 extends React.Component {
         const cardsList = this.props.cardsForQuiz
             .filter(card => card.lecture_segment_id <= this.state.lecture_segment_id)
             .filter(card => card.hidden_boolean === 0)
+
         
         // console.log(cardsList)
         return (
@@ -58,8 +66,10 @@ class LectureSection1 extends React.Component {
                     {this.state.show_quiz
                         ?
                         <div>
-                            <p>showing quiz</p>
-                            <QuizComponent cardsList={cardsList} />
+                            {/* <p>showing quiz</p> */}
+                            {/* <QuizComponent cardsList={cardsList} /> */}
+                            
+                            <CardDisplay card={cardsList[this.state.card_number]} />
                         </div>
                         :
                         <h2 onClick={this.showQuiz}>Click here to start quiz</h2>

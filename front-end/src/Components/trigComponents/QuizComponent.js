@@ -17,13 +17,9 @@ class QuizComponent extends React.Component {
         
     }
 
-    // cardsList = Object.values(this.props.cardsList)
-
     render() {
         const cardsList = Object.values(this.props.cardsList)
-        // console.log(cardsList)
-        // console.log(Array.isArray(cardsList))
-        // console.log(cardsList[0])
+
         return (
             <QuizComponentDiv>
                 <p>QuizComponent is displaying</p>

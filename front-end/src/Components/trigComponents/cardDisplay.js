@@ -44,10 +44,8 @@ class CardDisplay extends React.Component {
                         : <p> Click here to show the answer</p> 
                     }
                 </AnswerDiv>
-                
-                <p>Lecture segment is {this.props.card.lecture_segment_id}</p>
-                <p>currently using cardDisplay.js</p>
-                <button>didn't remember</button>
+          
+                <button onClick={this.props.increaseCardNumber}>didn't remember</button>
                 <button onClick={this.hideUserLectureCard}>remembered</button>
             </CardDisplayDiv>
         )
