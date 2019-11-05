@@ -4,7 +4,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getCardsForQuiz } from '../../Actions';
+import { getCardsForQuiz, hideUserLectureCard } from '../../Actions';
 
 // imported components
 import CardDisplay from './cardDisplay';
@@ -24,10 +24,11 @@ class LectureSection1 extends React.Component {
             show_quiz: 0,
             card_number: 0,
         }
-        this.increaseCardNumber = this.increaseCardNumber.bind(this)
+        this.increaseCardNumberRemembered = this.increaseCardNumberRemembered.bind(this)
+        this.increaseCardNumberDidNotRemember = this.increaseCardNumberDidNotRemember.bind(this)
     }
 
-    showQuiz = async e => {
+    showQuiz = e => {
         e.preventDefault()
         // console.log(this.props.userLectureCards)
         this.props.getCardsForQuiz(this.state.lecture_id)
@@ -37,13 +38,22 @@ class LectureSection1 extends React.Component {
         })
     }
 
-    increaseCardNumber() {
+    increaseCardNumberDidNotRemember() {
         this.setState({
             ...this.state,
             card_number: this.state.card_number + 1
         })
     }
 
+    increaseCardNumberRemembered = user_card_id => e => {
+        e.preventDefault()
+        this.props.hideUserLectureCard(user_card_id)
+        this.setState({
+            ...this.state,
+            card_number: this.state.card_number + 1
+        })
+    }
+    
     // generateCards() {
     //     const cardsList = this.props.cardsForQuiz
     //         .filter(card => card.lecture_segment_id <= this.state.lecture_segment_id)
@@ -75,9 +85,15 @@ class LectureSection1 extends React.Component {
                             {this.state.card_number < cardsList.length
                                 ?
                                 <div>
-                                    <CardDisplay card={cardsList[this.state.card_number]} />
-                                    <button onClick={this.increaseCardNumber}>Didn't remember</button>
-                                    <button onClick={this.increaseCardNumber}>Remembered</button>
+                                    {/* KEY here is used to render new component for each new card number. */}
+                                    {/* If there's no KEY, the child component state won't change, which is needed to hide and unhide answers */}
+                                    <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
+                                    <button onClick={this.increaseCardNumberDidNotRemember}>Didn't remember</button>
+                                    <button
+                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}
+                                    >
+                                        Remembered
+                                    </button>
                                 </div>
                                 :
                                 <div>
@@ -104,5 +120,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getCardsForQuiz },
+    { getCardsForQuiz, hideUserLectureCard },
 )(LectureSection1)

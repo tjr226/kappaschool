@@ -38,6 +38,7 @@ export const HIDE_USER_LECTURE_CARD_SUCCESS = 'HIDE_USER_LECTURE_CARD_SUCCESS';
 export const HIDE_USER_LECTURE_CARD_FAILURE = 'HIDE_USER_LECTURE_CARD_FAILURE';
 
 export const hideUserLectureCard = input => dispatch => {
+    // LECTURE_ID is needed to return the cards for that lecture, to populate the progress display on the right hand side of the screen
     const user_lecture_card_id = input;
     const lecture_id = 1;
     dispatch({ type: HIDE_USER_LECTURE_CARD_START })

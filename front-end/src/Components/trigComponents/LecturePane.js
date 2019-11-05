@@ -24,6 +24,7 @@ class LecturePane extends React.Component {
         this.props.getUserLectureCards(this.state.lecture_id)
     }
 
+
     render() {
         return (
             <LecturePaneDiv>
