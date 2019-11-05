@@ -29,8 +29,8 @@ class CardDisplay extends React.Component {
     }
 
     render() {
-        console.log("card display props")
-        console.log(this.props)
+        // console.log("card display props")
+        // console.log(this.props)
         if (!this.props.card) {
             return <div />
         }

@@ -60,7 +60,9 @@ class LectureSection1 extends React.Component {
             .filter(card => card.hidden_boolean === 0)
 
 
-        console.log("cardsList is", cardsList)
+        // console.log("cardsList is", cardsList)
+        // console.log("cardslist length", cardsList.length)
+        // console.log("card number", this.state.card_number)
         return (
             <LectureSection1Div>
                 <h4>Lecture Section One (LectureSectionOne.js, attempting to do the GenerateCards thing)</h4>
@@ -70,14 +72,19 @@ class LectureSection1 extends React.Component {
                     {this.state.show_quiz
                         ?
                         <div>
-                            {/* <p>showing quiz</p> */}
-                            {/* <QuizComponent cardsList={cardsList} /> */}
-                            <CardDisplay card={cardsList[this.state.card_number]} />
-
-                            <button onClick={this.increaseCardNumber} >Didn't remember</button>
-                            <button onClick={this.increaseCardNumber}>Remembered</button>
-
-
+                            {this.state.card_number < cardsList.length
+                                ?
+                                <div>
+                                    <CardDisplay card={cardsList[this.state.card_number]} />
+                                    <button onClick={this.increaseCardNumber}>Didn't remember</button>
+                                    <button onClick={this.increaseCardNumber}>Remembered</button>
+                                </div>
+                                :
+                                <div>
+                                    <h2>section review complete</h2>
+                                    <p>Section review complete</p>
+                                </div>
+                            }
                         </div>
                         :
                         <h2 onClick={this.showQuiz}>Click here to start quiz</h2>
