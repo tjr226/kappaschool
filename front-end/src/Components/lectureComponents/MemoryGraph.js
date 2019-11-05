@@ -23,9 +23,6 @@ class MemoryGraph extends React.Component {
         return (
             <div>
                 <h2>Progress</h2>
-                {/* <p>PLACEHOLDER wait to improve until quiz sections are working</p> */}
-                {/* <p>Unhidden cards: {unhiddenLectureCardsCount}</p> */}
-                {/* <p>Hidden cards: {hiddenLectureCardsCount}</p> */}
                 <MemoryGraphButton className="btn btn-success">One month: <span className="badge badge-light">0</span></MemoryGraphButton>
                 <br/>
                 <MemoryGraphButton className="btn btn-info">Two weeks: <span className="badge badge-light">0</span></MemoryGraphButton>

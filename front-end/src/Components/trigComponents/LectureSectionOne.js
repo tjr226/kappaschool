@@ -12,7 +12,17 @@ import CardDisplay from './cardDisplay';
 
 // styled components
 const LectureSection1Div = styled.div``
-const QuizDiv = styled.div``
+
+const LectureSectionHeader = styled.h3`
+    padding:20px;
+    `
+
+const QuizDiv = styled.div`
+    padding:20px;
+    `
+const TextDiv = styled.div`
+    padding:20px;
+    `
 
 
 class LectureSection1 extends React.Component {
@@ -53,30 +63,23 @@ class LectureSection1 extends React.Component {
             card_number: this.state.card_number + 1
         })
     }
-    
-    // generateCards() {
-    //     const cardsList = this.props.cardsForQuiz
-    //         .filter(card => card.lecture_segment_id <= this.state.lecture_segment_id)
-    //         .filter(card => card.hidden_boolean === 0)
-    //     // const cardsList = cards.map(card => <CardDisplay key={card.user_card_id} card={card} />)
-    //     // console.log(cardsList[1])
-    //     return cardsList
-    // }
-
 
     render() {
         const cardsList = this.props.cardsForQuiz
             .filter(card => card.lecture_segment_id <= this.state.lecture_segment_id)
             .filter(card => card.hidden_boolean === 0)
 
-
-        // console.log("cardsList is", cardsList)
-        // console.log("cardslist length", cardsList.length)
-        // console.log("card number", this.state.card_number)
         return (
             <LectureSection1Div>
-                <h4>Lecture Section One (LectureSectionOne.js, attempting to do the GenerateCards thing)</h4>
-                <p>should be 5 cards total</p>
+                <LectureSectionHeader>Lecture Section One (LectureSectionOne.js, attempting to do the GenerateCards thing)</LectureSectionHeader>
+                <TextDiv>
+                    <p>Learning ipsum blah blah blah</p>
+                    <p>Learning ipsum blah blah blah</p>
+                    <p>Learning ipsum blah blah blah</p>
+                    <p>Learning ipsum blah blah blah</p>
+                    <p>Learning ipsum blah blah blah</p>
+                    <p>Learning ipsum blah blah blah</p>
+                </TextDiv>
                 <QuizDiv>
 
                     {this.state.show_quiz
@@ -88,10 +91,10 @@ class LectureSection1 extends React.Component {
                                     {/* KEY here is used to render new component for each new card number. */}
                                     {/* If there's no KEY, the child component state won't change, which is needed to hide and unhide answers */}
                                     <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
-                                    <button 
+                                    <button
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberDidNotRemember}>
-                                        
+
                                         Didn't remember</button>
                                     <button
                                         className="btn btn-secondary"
@@ -101,13 +104,12 @@ class LectureSection1 extends React.Component {
                                 </div>
                                 :
                                 <div>
-                                    <h2>section review complete</h2>
-                                    <p>Section review complete</p>
+                                    <h5>section review complete</h5>
                                 </div>
                             }
                         </div>
                         :
-                        <h2 onClick={this.showQuiz}>Click here to start quiz</h2>
+                        <h5 onClick={this.showQuiz}>Click here to start quiz</h5>
                     }
                 </QuizDiv>
             </LectureSection1Div>
