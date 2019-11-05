@@ -16,11 +16,15 @@ const QuizDiv = styled.div``
 
 
 class LectureSection1 extends React.Component {
-    state = {
-        lecture_segment_id: 1,
-        lecture_id: 1,
-        show_quiz: 0,
-        card_number: 0,
+    constructor(props) {
+        super(props);
+        this.state = {
+            lecture_segment_id: 1,
+            lecture_id: 1,
+            show_quiz: 0,
+            card_number: 0,
+        }
+        this.increaseCardNumber = this.increaseCardNumber.bind(this)
     }
 
     showQuiz = async e => {
@@ -55,8 +59,8 @@ class LectureSection1 extends React.Component {
             .filter(card => card.lecture_segment_id <= this.state.lecture_segment_id)
             .filter(card => card.hidden_boolean === 0)
 
-        
-        // console.log(cardsList)
+
+        console.log("cardsList is", cardsList)
         return (
             <LectureSection1Div>
                 <h4>Lecture Section One (LectureSectionOne.js, attempting to do the GenerateCards thing)</h4>
@@ -68,8 +72,12 @@ class LectureSection1 extends React.Component {
                         <div>
                             {/* <p>showing quiz</p> */}
                             {/* <QuizComponent cardsList={cardsList} /> */}
-                            
                             <CardDisplay card={cardsList[this.state.card_number]} />
+
+                            <button onClick={this.increaseCardNumber} >Didn't remember</button>
+                            <button onClick={this.increaseCardNumber}>Remembered</button>
+
+
                         </div>
                         :
                         <h2 onClick={this.showQuiz}>Click here to start quiz</h2>

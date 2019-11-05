@@ -45,8 +45,8 @@ class CardDisplay extends React.Component {
                     }
                 </AnswerDiv>
           
-                <button onClick={this.props.increaseCardNumber}>didn't remember</button>
-                <button onClick={this.hideUserLectureCard}>remembered</button>
+                {/* <button onClick={this.props.increaseCardNumber}>didn't remember</button> */}
+                {/* <button onClick={this.hideUserLectureCard}>remembered</button> */}
             </CardDisplayDiv>
         )
     }
