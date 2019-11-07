@@ -5,9 +5,11 @@ import {
 
 const initialAuthState = {
     loggingIn: false,
+    loggedIn: false,
     registering: false,
     token: '',
     error: null,
+    loggedIn: false,
 };
 
 export const authReducer = (state = initialAuthState, action) => {
@@ -22,12 +24,14 @@ export const authReducer = (state = initialAuthState, action) => {
             return {
                 ...state,
                 loggingIn: false,
+                loggedIn: true,
                 token: action.payload,
             }
         case LOGIN_FAILURE:
             return {
                 ...state,
                 loggingIn: false,
+                // loggedIn: false,
                 error: action.payload,
                 token: ''
             }
@@ -41,12 +45,14 @@ export const authReducer = (state = initialAuthState, action) => {
             return {
                 ...state,
                 registering: false,
+                loggedIn: true,
                 token: action.payload,
             }
         case REGISTER_FAILURE:
             return {
                 ...state,
                 registering: false,
+                loggedIn: false,
                 error: action.payload,
                 token: '',
             }

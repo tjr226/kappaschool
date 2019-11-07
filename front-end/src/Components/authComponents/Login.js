@@ -1,6 +1,14 @@
+// import libraries
 import React from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+
+// import components
+import Signup from './Signup';
 import { login } from '../../Actions';
+
+// styled components
 
 class Login extends React.Component {
     state = {
@@ -23,29 +31,32 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.login(this.state.credentials)
             .then(() => {
-                this.props.history.push('/trig');
+                this.props.history.push('/reading');
             })
     }
 
     render() {
         return (
-            <form onSubmit={this.login}>
-                <input
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.credentials.email}
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="text"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.credentials.password}
-                    onChange={this.handleChange}
-                />
-                <button>Log In</button>
-            </form>
+            <div>
+                <form onSubmit={this.login}>
+                    <h2>Log in</h2>
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.credentials.email}
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type="text"
+                        name="password"
+                        placeholder="Password"
+                        value={this.state.credentials.password}
+                        onChange={this.handleChange}
+                    />
+                    <button>Log In</button>
+                </form>
+            </div>
         )
     }
 }
@@ -57,4 +68,4 @@ class Login extends React.Component {
 export default connect(
     null,
     { login }
-)( Login );
+)(Login);

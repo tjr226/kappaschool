@@ -13,6 +13,9 @@ const LecturePaneDiv = styled.div`
     width:80%;
     padding:10px;
     `
+const HeaderDiv = styled.h1`
+    padding:20px;
+    `
 
 class LecturePane extends React.Component {
     state = {
@@ -23,11 +26,10 @@ class LecturePane extends React.Component {
         this.props.getUserLectureCards(this.state.lecture_id)
     }
 
-
     render() {
         return (
             <LecturePaneDiv>
-                <h1>Trig Lecture placeholder</h1>
+                <HeaderDiv>Trig Lecture placeholder</HeaderDiv>
                 {/* <LectureSection1 /> */}
                 <LectureSectionOne />
             </LecturePaneDiv>

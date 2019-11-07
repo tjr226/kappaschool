@@ -13,6 +13,11 @@ import CardDisplay from './cardDisplay';
 // styled components
 const LectureSection1Div = styled.div``
 
+const RememberedButton = styled.button`
+    margin:5px
+    width:15%
+    `
+
 const LectureSectionHeader = styled.h3`
     padding:20px;
     `
@@ -20,10 +25,10 @@ const LectureSectionHeader = styled.h3`
 const QuizDiv = styled.div`
     padding:20px;
     `
+
 const TextDiv = styled.div`
     padding:20px;
     `
-
 
 class LectureSection1 extends React.Component {
     constructor(props) {
@@ -71,7 +76,7 @@ class LectureSection1 extends React.Component {
 
         return (
             <LectureSection1Div>
-                <LectureSectionHeader>Lecture Section One (LectureSectionOne.js, attempting to do the GenerateCards thing)</LectureSectionHeader>
+                <LectureSectionHeader>Lecture Section One (LectureSectionOne.js)</LectureSectionHeader>
                 <TextDiv>
                     <p>Learning ipsum blah blah blah</p>
                     <p>Learning ipsum blah blah blah</p>
@@ -91,16 +96,15 @@ class LectureSection1 extends React.Component {
                                     {/* KEY here is used to render new component for each new card number. */}
                                     {/* If there's no KEY, the child component state won't change, which is needed to hide and unhide answers */}
                                     <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
-                                    <button
+                                    <RememberedButton
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberDidNotRemember}>
-
-                                        Didn't remember</button>
-                                    <button
+                                        Didn't remember</RememberedButton>
+                                    <RememberedButton
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}>
                                         Remembered
-                                    </button>
+                                    </RememberedButton>
                                 </div>
                                 :
                                 <div>
