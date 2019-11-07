@@ -9,6 +9,10 @@ import LetterSound from './LetterSound';
 
 // styled components
 const ReadingHomeDiv = styled.div``
+const HeaderText = styled.h1`
+    padding: 10px 10px;
+    font-size:5rem;
+`
 
 class ReadingHome extends React.Component {
 
@@ -16,11 +20,11 @@ class ReadingHome extends React.Component {
         return (
             <ReadingHomeDiv>
                 <Header />
-                <h3>Let's learn how to read!</h3>
+                <HeaderText>Let's learn how to read!</HeaderText>
                 <LetterSound />
             </ReadingHomeDiv>
         )
     }
 }
 
-export default ReadingHome
+export default ReadingHome;

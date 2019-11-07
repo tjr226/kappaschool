@@ -6,15 +6,21 @@ const HeaderDiv = styled.div`
     flex-direction:row;
     justify-content:space-between;
     padding: 10px 0px;
+    background-color:grey;
     `
 
-class Header extends React.Component {
+const HeaderText = styled.h1`
+    font-size:8rem;
+    color:white;
+    padding-left:10px;
+`
 
+class Header extends React.Component {
 
     render() {
         return (
             <HeaderDiv>
-                <h1>Kappa School</h1>
+                <HeaderText>Kappa School</HeaderText>
             </HeaderDiv>
         )
     }
