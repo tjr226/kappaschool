@@ -12,8 +12,12 @@ router.post('/register', middleware.validateUser, (req, res) => {
     user.password = hash;
 
     Users.add(user)
-        .then(saved => {
-            res.status(201).json(saved);
+        .then(user => {
+            const token = generateToken(user);
+            res.status(201).json({
+                message: `Welcome ${user.email}`,
+                token
+            });
         })
         .catch(error => {
             res.status(500).json(error);
@@ -21,7 +25,7 @@ router.post('/register', middleware.validateUser, (req, res) => {
 })
 
 router.post('/login', middleware.validateUser, (req, res) => {
-    console.log("login req.body", req.body)
+    // console.log("login req.body", req.body)
 
     const { email, password } = req.body;
     Users.findBy({ email })
