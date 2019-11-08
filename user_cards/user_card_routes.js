@@ -14,6 +14,17 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/class/:class_id/findLectures', (req, res) => {
+    const class_id = req.params.class_id;
+    UserCards.findLecturesByClassId(class_id)
+        .then(lectures => {
+            res.status(200).json(lectures);
+        })
+        .catch(error => {
+            res.status(500).json({ errorMessage: "Could not get lectures by class id." })
+        })
+})
+
 router.put('/:user_card_id/lecture/:lecture_id/hideCard', (req, res) => {
     const lecture_id = req.params.lecture_id;
     const user_card_id = req.params.user_card_id;

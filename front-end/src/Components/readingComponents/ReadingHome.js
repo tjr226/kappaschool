@@ -2,10 +2,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { getLecturesByClass } from '../../Actions';
 
 // imported components
 import Header from './Header';
-import LetterSound from './LetterSound';
+import PhonemeBox from './PhonemeBox';
+import Flashcard from './Flashcard';
 
 // styled components
 const ReadingHomeDiv = styled.div``
@@ -15,16 +17,29 @@ const HeaderText = styled.h1`
 `
 
 class ReadingHome extends React.Component {
-
+    componentDidMount() {
+        this.props.getLecturesByClass(2);
+    }
     render() {
         return (
             <ReadingHomeDiv>
                 <Header />
                 <HeaderText>Let's learn how to read!</HeaderText>
-                <LetterSound />
+                {this.props.lectures
+                 .map(lecture => <PhonemeBox key={lecture.id} lecture={lecture} /> )}
+                {/* <Flashcard /> */}
             </ReadingHomeDiv>
         )
     }
 }
 
-export default ReadingHome;
+const mapStateToProps = state => {
+    return {
+        lectures: state.classReducer.lectures,
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { getLecturesByClass },
+)(ReadingHome)

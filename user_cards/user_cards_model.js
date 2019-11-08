@@ -9,6 +9,7 @@ module.exports = {
     findUnhiddenCardsByUserId,
     hideCard,
     getCurrentAndPreviousCardsForLectureSegment,
+    findLecturesByClassId,
     update,
     remove
 }
@@ -46,6 +47,11 @@ function findUnhiddenCardsByUserId(user_id) {
     return db('user_cards')
         .where('user_id', user_id)
         .where('hidden_boolean', 0)
+}
+
+function findLecturesByClassId(class_id) {
+    return db('lectures')
+        .where('class_id', class_id)
 }
 
 function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id) {

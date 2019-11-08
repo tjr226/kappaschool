@@ -14,6 +14,7 @@ const LetterSoundDiv = styled.div`
     border-radius: 10px;
     width:50%;
     padding: 20px;
+    margin:20px 10px;
     `
 
 const HeaderText = styled.h1`
@@ -30,7 +31,6 @@ const TopRowDiv = styled.div`
 const FakeButtonDiv = styled.div``
 
 const PracticeButtonDiv = styled.div`
-
     `
 
 
@@ -40,17 +40,17 @@ class LetterSound extends React.Component {
             <div>
                 <LetterSoundDiv>
                     <TopRowDiv>
-                        <HeaderText>Short A (placeholder)</HeaderText>
+                        <HeaderText>{this.props.lecture.lecture_name}</HeaderText>
                         <PracticeButtonDiv>
-                            <button class="btn-lg btn-outline-primary">Practice</button>
+                            <button className="btn-lg btn-outline-primary">Practice</button>
                         </PracticeButtonDiv>
                     </TopRowDiv>
                     <FakeButtonDiv>
-                        <button class="btn-lg btn-outline-primary">1</button>
-                        <button class="btn-lg btn-outline-primary">2</button>
-                        <button class="btn-lg btn-outline-primary">3</button>
-                        <button class="btn-lg btn-outline-primary">4</button>
-                        <button class="btn-lg btn-outline-primary">5</button>
+                        <button className="btn-lg btn-outline-primary">1</button>
+                        <button className="btn-lg btn-outline-primary">2</button>
+                        <button className="btn-lg btn-outline-primary">3</button>
+                        <button className="btn-lg btn-outline-primary">4</button>
+                        <button className="btn-lg btn-outline-primary">5</button>
                     </FakeButtonDiv>
                 </LetterSoundDiv>
             </div>
