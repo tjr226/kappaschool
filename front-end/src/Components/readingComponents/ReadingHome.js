@@ -17,9 +17,14 @@ const HeaderText = styled.h1`
 `
 
 class ReadingHome extends React.Component {
-    componentDidMount() {
-        this.props.getLecturesByClass(2);
+    state = {
+        class_id: 1
     }
+
+    componentDidMount() {
+        this.props.getLecturesByClass(this.state.class_id);
+    }
+    
     render() {
         return (
             <ReadingHomeDiv>

@@ -9,7 +9,6 @@ const initialAuthState = {
     registering: false,
     token: '',
     error: null,
-    loggedIn: false,
 };
 
 export const authReducer = (state = initialAuthState, action) => {

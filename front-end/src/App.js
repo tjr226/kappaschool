@@ -1,27 +1,45 @@
 // import libraries
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // import components
 import Login from './Components/authComponents/Login';
 import Signup from './Components/authComponents/Signup';
-import AuthComponent from './Components/authComponents/AuthComponent.js';
-import ReadingComponent from './Components/readingComponents/ReadingHome.js';
+import ReadingHome from './Components/readingComponents/ReadingHome.js';
 
 import PrivateRoute from './PrivateRoute';
 
 class App extends React.Component {
-  
-  render() {  
-      return (
-        <Router>
-          <Route exact path="/" component={ AuthComponent } />
-          <Route exact path="/login" component={ AuthComponent } />
-          <Route exact path="/signup" component={ AuthComponent } />
-          <PrivateRoute exact path="/reading" component={ReadingComponent} />
-        </Router>
-      );
+
+  render() {
+    return (
+      <Router>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/signup" component={ Signup } />
+        {localStorage.getItem('token')
+          ?
+          <div />
+          :
+          <div>
+            <Link to="/login">Log In</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        }
+        <PrivateRoute exact path="/reading" component={ReadingHome} />
+      </Router>
+    );
   };
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.authReducer.loggedIn
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null,
+)(App)

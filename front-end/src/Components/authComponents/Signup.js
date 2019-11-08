@@ -1,11 +1,9 @@
 // import libraries
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 // import components
 import { register } from '../../Actions';
-import Login from './Login';
 
 // styled components
 
@@ -60,10 +58,6 @@ class Signup extends React.Component {
         )
     }
 }
-
-// const mapStateToProps = state => ({
-//     registering: state.registering
-// })
 
 export default connect(
     null,
