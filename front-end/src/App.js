@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Login from './Components/authComponents/Login';
 import Signup from './Components/authComponents/Signup';
 import ReadingHome from './Components/readingComponents/ReadingHome.js';
-
+import ReadingPractice from './Components/readingComponents/ReadingPractice.js';
 import PrivateRoute from './PrivateRoute';
 
 class App extends React.Component {
@@ -28,6 +28,7 @@ class App extends React.Component {
           </div>
         }
         <PrivateRoute exact path="/reading" component={ReadingHome} />
+        <PrivateRoute exact path="/readingPractice" component={ReadingPractice} />
       </Router>
     );
   };

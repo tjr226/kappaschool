@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // imported components
 
 // styled components
@@ -45,6 +46,8 @@ class LetterSound extends React.Component {
                             <button className="btn-lg btn-outline-primary">Practice</button>
                         </PracticeButtonDiv>
                     </TopRowDiv>
+                    <Link to="/readingPractice">Practice</Link>
+                    {/* <Route exact path="/reading */}
                     <FakeButtonDiv>
                         <button className="btn-lg btn-outline-primary">1</button>
                         <button className="btn-lg btn-outline-primary">2</button>
