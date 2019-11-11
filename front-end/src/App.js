@@ -1,6 +1,6 @@
 // import libraries
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // import components
@@ -15,9 +15,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route exact path="/" component={ Login } />
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/signup" component={ Signup } />
+      {/* <Switch> */}
+        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         {localStorage.getItem('token')
           ?
           <div />
@@ -29,6 +30,7 @@ class App extends React.Component {
         }
         <PrivateRoute exact path="/reading" component={ReadingHome} />
         <PrivateRoute exact path="/readingPractice" component={ReadingPractice} />
+      {/* </Switch> */}
       </Router>
     );
   };

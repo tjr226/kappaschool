@@ -52,8 +52,6 @@ const CheckButton = styled.button`
     border-radius:50px;
 `
 
-
-
 class Flashcard extends React.Component {
     render() {
         return (
