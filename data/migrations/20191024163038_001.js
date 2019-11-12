@@ -79,7 +79,7 @@ exports.up = function (knex) {
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('patterns')
+                .inTable('spaced_repetition_patterns')
             user_cards.integer('previous_spaced_repetition_days')
                 // tracks the amount of days a card was "pushed"
                 // this should probably start at zero for every card

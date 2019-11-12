@@ -25,16 +25,15 @@ async function add(user_card) {
 
 async function addLectureSegmentCardsToUser(lecture_segment_id, user_id) {
     cards = await db('cards').where('lecture_segment_id', lecture_segment_id)
-        for (i = 0; i < cards.length; i++) {
-            new_user_card = {};
-            new_user_card.user_id = user_id;
-            new_user_card.card_id = cards[i].id
-            new_user_card.hidden_boolean = 0
-            new_user_card.unix_timestamp = 0
-            await db('user_cards').insert(new_user_card)
-
-        } 
-    return cards 
+    for (i = 0; i < cards.length; i++) {
+        new_user_card = {};
+        new_user_card.user_id = user_id;
+        new_user_card.card_id = cards[i].id
+        new_user_card.hidden_boolean = 0
+        new_user_card.unix_timestamp = 0
+        await db('user_cards').insert(new_user_card)
+    }
+    return cards
 }
 
 function findByUserCardId(id) {
@@ -58,7 +57,7 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
     return db('user_cards').join('cards', 'user_cards.card_id', 'cards.id')
         .where('user_id', user_id)
         .where('hidden_boolean', 0)
-        .andWhere(function() {
+        .andWhere(function () {
             this.where('lecture_segment_id', '<=', lecture_segment_id)
         })
 }
@@ -66,7 +65,7 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
 // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
 function findByLectureId(lecture_id, user_id) {
     return db('user_cards')
-        .select([ 'user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
+        .select(['user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
             'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',
             'lecture_segments.id as lecture_segment_id', 'lecture_segments.lecture_id as lecture_id'
         ])
@@ -86,7 +85,7 @@ async function hideCard(changes, id, user_id, lecture_id) {
         .where({ id })
         .update(changes)
     return db('user_cards')
-        .select([ 'user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
+        .select(['user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.unix_timestamp',
             'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',
             'lecture_segments.id as lecture_segment_id', 'lecture_segments.lecture_id as lecture_id'
         ])
