@@ -15,22 +15,20 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-      {/* <Switch> */}
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         {localStorage.getItem('token')
           ?
-          <div />
+          null
           :
           <div>
             <Link to="/login">Log In</Link>
             <Link to="/signup">Sign Up</Link>
-          </div>
+            </div>
         }
         <PrivateRoute exact path="/reading" component={ReadingHome} />
         <PrivateRoute exact path="/readingPractice" component={ReadingPractice} />
-      {/* </Switch> */}
       </Router>
     );
   };

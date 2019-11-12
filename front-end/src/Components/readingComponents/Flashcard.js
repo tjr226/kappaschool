@@ -57,6 +57,7 @@ class Flashcard extends React.Component {
         return (
             <FlashcardDiv>
                 <FlashcardText>map</FlashcardText>
+                <p>{this.props.lecture_segment}</p>
                 <div />
                 <ButtonContainer>
                     <ClockButton>◴</ClockButton>

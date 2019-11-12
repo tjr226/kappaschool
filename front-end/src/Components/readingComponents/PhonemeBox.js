@@ -1,11 +1,9 @@
 // imported libraries
 import React from 'react';
 import styled from 'styled-components';
-import ReadingPractice from './ReadingPractice.js';
-import LinkButton from '../supportComponents/LinkButton.js';
 
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // imported components
+import Flashcard from './Flashcard.js';
 
 // styled components
 const LetterSoundDiv = styled.div`
@@ -15,7 +13,7 @@ const LetterSoundDiv = styled.div`
     border-color: #007bff;
     color: #007bff;
     border-radius: 10px;
-    width:50%;
+    width:70%;
     padding: 20px;
     margin:20px 10px;
     `
@@ -39,77 +37,43 @@ const TopRowDiv = styled.div`
 `
 
 const FakeButtonDiv = styled.div``
-
-const PracticeButtonDiv = styled.div`
-    `
+const PracticeButtonDiv = styled.div``
 
 class LetterSound extends React.Component {
     state = {
         lecture_id: this.props.lecture.id,
-        // lecture_segment: '',
-        lecture_segment: 1,
+        lecture_segment: '',
+        show_quiz: false,
     }
 
-    // componentDidMount() {
-    // console.log("state")
-    // console.log(this.state)
-    // }
-
-    setLectureSection = input => e => {
+    startQuiz = input => e => {
         e.preventDefault();
-        this.setState({
+        this.setState({ 
             ...this.state,
-            lecture_segment: input
+            lecture_segment: input,
+            show_quiz: !this.state.show_quiz
         })
-        // console.log(this.state)
-        // console.log(tshis.props)
     }
-
 
     render() {
         return (
-            <Router>
-                <div>
                     <LetterSoundDiv>
-                        <Route exact path="/readingPractice"
-                            // component={ReadingPractice} 
-                            // render={(routeProps) => <ReadingPractice {...routeProps} lecture_id={this.state.lecture_id} lecture_segment={this.state.lecture_segment} />}
-                            render={(routeProps) => <ReadingPractice {...routeProps} lecture_id={1} lecture_segment={1} />}
-                        />
                         <TopRowDiv>
                             <HeaderText>{this.props.lecture.lecture_name}</HeaderText>
-                            <PracticeButtonDiv>
+                            {/* <PracticeButtonDiv onClick={this.showQuiz}>
                                 <button className="btn-lg btn-outline-primary">Practice</button>
-                            </PracticeButtonDiv>
+                            </PracticeButtonDiv> */}
                         </TopRowDiv>
-                        {/* <Link to="/readingPractice">Practice</Link> */}
 
                         <FakeButtonDiv>
-                            {/* <LinkButton
-                            to="/readingPractice"
-                            className="btn-lg btn-outline-primary"
-                            lecture_id={this.props.lecture_id}
-                            lecture_section_id={this.props.lecture_section_id}
-                        >
-                            1
-                                </LinkButton> */}
-
-                            <div onClick={this.setLectureSection(1)}>
-                                <Link to="/readingPractice">1</Link>
-                            </div>
-
-                            <br></br>
-                            <button className="btn-lg btn-outline-primary">1</button>
-
-                            <button className="btn-lg btn-outline-primary">2</button>
-                            <button className="btn-lg btn-outline-primary">3</button>
-                            <button className="btn-lg btn-outline-primary">4</button>
-                            <button className="btn-lg btn-outline-primary">5</button>
+                            <button onClick={this.startQuiz(1)} className="btn-lg btn-outline-primary">1</button>
+                            <button onClick={this.startQuiz(2)} className="btn-lg btn-outline-primary">2</button>
+                            <button onClick={this.startQuiz(3)} className="btn-lg btn-outline-primary">3</button>
+                            <button onClick={this.startQuiz(4)} className="btn-lg btn-outline-primary">4</button>
+                            <button onClick={this.startQuiz(5)} className="btn-lg btn-outline-primary">5</button>
                         </FakeButtonDiv>
+                        {this.state.show_quiz && <Flashcard lecture_id={this.state.lecture_id} lecture_segment={this.state.lecture_segment} />}
                     </LetterSoundDiv>
-
-                </div>
-            </Router>
         )
     }
 }

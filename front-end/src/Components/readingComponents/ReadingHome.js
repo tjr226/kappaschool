@@ -29,10 +29,8 @@ class ReadingHome extends React.Component {
         return (
             <ReadingHomeDiv>
                 <Header />
-                <HeaderText>Let's learn how to read!</HeaderText>
                 {this.props.lectures
                  .map(lecture => <PhonemeBox key={lecture.id} lecture={lecture} /> )}
-                {/* <Flashcard /> */}
             </ReadingHomeDiv>
         )
     }
