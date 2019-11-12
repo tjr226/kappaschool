@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
         })
 })
 
+// get Lectures by Class Id
 router.get('/class/:class_id/findLectures', (req, res) => {
     const class_id = req.params.class_id;
     UserCards.findLecturesByClassId(class_id)
@@ -25,6 +26,21 @@ router.get('/class/:class_id/findLectures', (req, res) => {
         })
 })
 
+
+// get Lecture Segments by Lecture Id
+router.get('/lecture/:lecture_id/findLectureSegments', (req, res) => {
+    const lecture_id = req.params.lecture_id;
+    UserCards.findLectureSegmentsByLectureId(lecture_id)
+        .then(lecture_segments => {
+            res.status(200).json(lecture_segments);
+        })
+        .catch(error => {
+            res.status(500).json({ errorMessage: "Could not get lecture segments by lecture id." })
+        })
+})
+
+
+// hide UserCards
 router.put('/:user_card_id/lecture/:lecture_id/hideCard', (req, res) => {
     const lecture_id = req.params.lecture_id;
     const user_card_id = req.params.user_card_id;

@@ -10,6 +10,7 @@ module.exports = {
     hideCard,
     getCurrentAndPreviousCardsForLectureSegment,
     findLecturesByClassId,
+    findLectureSegmentsByLectureId,
     update,
     remove
 }
@@ -53,6 +54,11 @@ function findLecturesByClassId(class_id) {
         .where('class_id', class_id)
 }
 
+function findLectureSegmentsByLectureId(lecture_id) {
+    return db('lecture_segments')
+        .where('lecture_id', lecture_id)
+}
+
 function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id) {
     return db('user_cards').join('cards', 'user_cards.card_id', 'cards.id')
         .where('user_id', user_id)
@@ -63,6 +69,7 @@ function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id
 }
 
 // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
+// this returns all user_cards from this lecture for the user
 function findByLectureId(lecture_id, user_id) {
     return db('user_cards')
         .select([
