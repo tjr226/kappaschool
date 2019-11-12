@@ -1,12 +1,14 @@
 // imported libraries
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 // imported components
 import Flashcard from './Flashcard.js';
+import { getCardsForQuiz } from '../../Actions';
 
 // styled components
-const LetterSoundDiv = styled.div`
+const PhonemeBoxDiv = styled.div`
     padding-left:10px;
     border-style: solid;
     border-width: 5px;
@@ -39,15 +41,17 @@ const TopRowDiv = styled.div`
 const FakeButtonDiv = styled.div``
 const PracticeButtonDiv = styled.div``
 
-class LetterSound extends React.Component {
+class PhonemeBox extends React.Component {
     state = {
         lecture_id: this.props.lecture.id,
         lecture_segment: '',
         show_quiz: false,
+        card_number: 0,
     }
 
     startQuiz = input => e => {
         e.preventDefault();
+        this.props.getCardsForQuiz(this.state.lecture_id)
         this.setState({ 
             ...this.state,
             lecture_segment: input,
@@ -57,7 +61,7 @@ class LetterSound extends React.Component {
 
     render() {
         return (
-                    <LetterSoundDiv>
+                    <PhonemeBoxDiv>
                         <TopRowDiv>
                             <HeaderText>{this.props.lecture.lecture_name}</HeaderText>
                             {/* <PracticeButtonDiv onClick={this.showQuiz}>
@@ -73,9 +77,19 @@ class LetterSound extends React.Component {
                             <button onClick={this.startQuiz(5)} className="btn-lg btn-outline-primary">5</button>
                         </FakeButtonDiv>
                         {this.state.show_quiz && <Flashcard lecture_id={this.state.lecture_id} lecture_segment={this.state.lecture_segment} />}
-                    </LetterSoundDiv>
+                    </PhonemeBoxDiv>
         )
     }
 }
 
-export default LetterSound;
+const mapStateToProps = state => {
+    return {
+        cardsForQuiz: state.cardReducer.cardsForQuiz,
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { getCardsForQuiz },
+    // null,
+)(PhonemeBox)
