@@ -73,9 +73,9 @@ router.get('/lecture/:lecture_id', (req, res) => {
 // don't need lecture_id for Trig Demo
 router.get('/currentAndPreviousCardsForLectureSegment/:lecture_segment_id', (req, res) => {
     const lecture_segment_id = req.params.lecture_segment_id
-    console.log("in currentAndPrevCardsForLectureSegment route, lecture segment id is", lecture_segment_id)
+    // console.log("in currentAndPrevCardsForLectureSegment route, lecture segment id is", lecture_segment_id)
     const user_id = req.user.user_id
-    console.log("user_id in current and prev is", user_id)
+    // console.log("user_id in current and prev is", user_id)
     UserCards.getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id)
         .then(cards => {
             res.status(200).json(cards);

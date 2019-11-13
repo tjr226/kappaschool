@@ -2,7 +2,7 @@ import {
     GET_USER_LECTURE_CARDS_START, GET_USER_LECTURE_CARDS_SUCCESS, GET_USER_LECTURE_CARDS_FAILURE,
     HIDE_USER_LECTURE_CARD_START, HIDE_USER_LECTURE_CARD_SUCCESS, HIDE_USER_LECTURE_CARD_FAILURE,
     GET_CARDS_FOR_QUIZ_START, GET_CARDS_FOR_QUIZ_SUCCESS, GET_CARDS_FOR_QUIZ_FAILURE,
-    
+    GET_CURRENT_PREV_CARDS_LECTURE_SECTION_START, GET_CURRENT_PREV_CARDS_LECTURE_SECTION_SUCCESS, GET_CURRENT_PREV_CARDS_LECTURE_SECTION_FAILURE,
 
 } from '../Actions/cardActions.js';
 
@@ -74,6 +74,24 @@ export const cardReducer = (state = initialCardState, action) => {
                 cardsForQuiz: action.payload
             }
         case GET_CARDS_FOR_QUIZ_FAILURE:
+            return {
+                ...state,
+                gettingCardsForQuiz: false,
+                error: action.payload,
+            }
+        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_START:
+            return {
+                ...state,
+                gettingCardsForQuiz: true,
+                error: null
+            }
+        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_SUCCESS:
+            return {
+                ...state,
+                gettingCardsForQuiz: false,
+                cardsForQuiz: action.payload,
+            }
+        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_FAILURE:
             return {
                 ...state,
                 gettingCardsForQuiz: false,

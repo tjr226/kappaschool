@@ -39,9 +39,7 @@ class LectureSection1 extends React.Component {
             show_quiz: 0,
             card_number: 0,
         }
-        this.increaseCardNumberRemembered = this.increaseCardNumberRemembered.bind(this)
-        this.increaseCardNumberDidNotRemember = this.increaseCardNumberDidNotRemember.bind(this)
-    }
+        }
 
     showQuiz = e => {
         e.preventDefault()
