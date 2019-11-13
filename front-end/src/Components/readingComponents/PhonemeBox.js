@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // imported components
 import Flashcard from './Flashcard.js';
 import ReadingCardDisplay from './ReadingCardDisplay';
-import { getCardsForQuiz } from '../../Actions';
+import { getCardsForQuiz, getLectureSectionsByLecture } from '../../Actions';
 
 // styled components
 const PhonemeBoxDiv = styled.div`
@@ -50,29 +50,31 @@ class PhonemeBox extends React.Component {
         card_number: 0,
     }
 
+    componentDidMount() {
+        this.props.getLectureSectionsByLecture(this.state.lecture_id)
+    }
+
     startQuiz = input => e => {
         e.preventDefault();        
         this.setState({
             ...this.state,
             lecture_segment: input,
             show_quiz: !this.state.show_quiz
-        })
-        this.props.getCardsForQuiz(this.state.lecture_id)
-
+        });
     }
 
     render() {
         // const cardsList = this.props.cardsForQuiz
             // .filter(card => card.lecture_segment_id == this.state.lecture_segment_id)
-        // console.log(cardsList)
+
 
         return (
             <PhonemeBoxDiv>
                 <TopRowDiv>
                     <HeaderText>{this.props.lecture.lecture_name}</HeaderText>
-                    {/* <PracticeButtonDiv onClick={this.showQuiz}>
+                    <PracticeButtonDiv onClick={this.showQuiz}>
                                 <button className="btn-lg btn-outline-primary">Practice</button>
-                            </PracticeButtonDiv> */}
+                            </PracticeButtonDiv>
                 </TopRowDiv>
 
                 <FakeButtonDiv>
@@ -82,21 +84,7 @@ class PhonemeBox extends React.Component {
                     <button onClick={this.startQuiz(4)} className="btn-lg btn-outline-primary">4</button>
                     <button onClick={this.startQuiz(5)} className="btn-lg btn-outline-primary">5</button>
                 </FakeButtonDiv>
-                {/* {this.state.show_quiz && <Flashcard lecture_id={this.state.lecture_id} lecture_segment={this.state.lecture_segment} />} */}
-                {this.state.show_quiz
-                    ?
-                    <div>
-
-                        {this.state.card_number < this.props.cardsForQuiz.length 
-                        ?
-                        <ReadingCardDisplay key={this.state.card_number} card={this.props.cardsForQuiz[this.state.card_number]} />
-                        :
-                        <p>Review Complete</p>
-                        }
-                    </div>
-                    :
-                    <div>Quiz not started</div>
-                }
+                {this.state.show_quiz && <Flashcard lecture_id={this.state.lecture_id} lecture_segment={this.state.lecture_segment} />}
 
             </PhonemeBoxDiv>
         )
@@ -111,6 +99,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getCardsForQuiz },
-    // null,
+    { getCardsForQuiz, getLectureSectionsByLecture },
 )(PhonemeBox)

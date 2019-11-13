@@ -18,3 +18,18 @@ export const getLecturesByClass = input => dispatch => {
         })
 }
 
+export const GET_LECTURE_SECTIONS_BY_LECTURE_START = 'GET_LECTURE_SECTIONS_BY_LECTURE_START';
+export const GET_LECTURE_SECTIONS_BY_LECTURE_SUCCESS = 'GET_LECTURE_SECTIONS_BY_LECTURE_SUCCESS';
+export const GET_LECTURE_SECTIONS_BY_LECTURE_FAILURE = 'GET_LECTURE_SECTIONS_BY_LECTURE_FAILURE';
+
+export const getLectureSectionsByLecture = input => dispatch => {
+    const lecture_id = input;
+    dispatch({ type: GET_LECTURE_SECTIONS_BY_LECTURE_START })
+    axiosWithAuth().get(`${api_prefix}/user_cards/lecture/${lecture_id}/findLectureSections`)
+        .then(res => {
+            dispatch({ type: GET_LECTURE_SECTIONS_BY_LECTURE_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: GET_LECTURE_SECTIONS_BY_LECTURE_FAILURE, payload: err })
+        })
+}

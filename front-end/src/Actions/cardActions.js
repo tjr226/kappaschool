@@ -40,7 +40,6 @@ export const getCardsForQuiz = input => dispatch => {
         })
 }
 
-
 export const HIDE_USER_LECTURE_CARD_START = 'HIDE_USER_LECTURE_CARD_START';
 export const HIDE_USER_LECTURE_CARD_SUCCESS = 'HIDE_USER_LECTURE_CARD_SUCCESS';
 export const HIDE_USER_LECTURE_CARD_FAILURE = 'HIDE_USER_LECTURE_CARD_FAILURE';
