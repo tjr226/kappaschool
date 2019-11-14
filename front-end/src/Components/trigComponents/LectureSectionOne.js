@@ -14,7 +14,7 @@ import CardDisplay from './cardDisplay';
 const LectureSection1Div = styled.div``
 
 const RememberedButton = styled.button`
-    margin:5px
+    margin:5px;
     width:15%
     `
 
