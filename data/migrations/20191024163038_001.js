@@ -60,6 +60,20 @@ exports.up = function (knex) {
                 .references('id')
                 .inTable('spaced_repetition_patterns');
         })
+        .createTable('class_spaced_repetition_pattern', class_pattern => {
+            class_pattern.increments();
+            class_pattern.integer('class_id')
+                .unsigned()
+                .notNullable()
+                .references('id')
+                .inTable('classes')
+                .unique()
+            class_pattern.integer('spaced_repetition_pattern_id')
+                .unsigned()
+                .notNullable()
+                .references('id')
+                .inTable('spaced_repetition_patterns')
+        })
         .createTable('user_cards', user_cards => {
             user_cards.increments()
             user_cards.integer('user_id')
@@ -95,6 +109,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.schema
         .dropTableIfExists('user_cards')
+        .dropTableIfExists('class_spaced_repetition_pattern')
         .dropTableIfExists('spaced_repetition_pattern_days')
         .dropTableIfExists('spaced_repetition_patterns')
         .dropTableIfExists('cards')

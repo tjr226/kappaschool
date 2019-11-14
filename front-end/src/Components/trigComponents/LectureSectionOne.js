@@ -39,7 +39,7 @@ class LectureSection1 extends React.Component {
             show_quiz: 0,
             card_number: 0,
         }
-        }
+    }
 
     showQuiz = e => {
         e.preventDefault()
