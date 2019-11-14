@@ -7,8 +7,12 @@ import ShortASection2 from '../readingLectureSectionComponents/Short_A_2';
 
 
 const ShortALectureDiv = styled.div``
-
+    
 class ShortALecture extends React.Component {
+    state = {
+        lecture_id: 1
+    }
+
     render() {
         return (
             <ShortALectureDiv>

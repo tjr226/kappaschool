@@ -5,9 +5,13 @@ import { connect } from 'react-redux';
 
 // imported components, functions
 import { getCurrentPrevCardsLectureSection } from '../../../Actions';
+import CardDisplay from '../cardDisplay';
 
 // styled components
 const ShortA1QuizDiv = styled.div``
+
+const QuizDiv = styled.div``
+const QuizShowingDiv = styled.div``
 
 class ShortA1Quiz extends React.Component {
     constructor(props) {
@@ -23,12 +27,12 @@ class ShortA1Quiz extends React.Component {
         // this.increaseCardNumberDidNotRemember = this.increaseCardNumberDidNotRemember.bind(this)
     }
 
-    componentDidMount() {
-        this.props.getCurrentPrevCardsLectureSection(this.state.lecture_segment_id)
-    }
+    // componentDidMount() {
+    //     }
     showQuiz = e => {
         e.preventDefault();
         // this.props.getCardsForLectureSection(this.state.lecture_segment_id);
+        this.props.getCurrentPrevCardsLectureSection(this.state.lecture_segment_id)
         this.setState({
             ...this.state,
             show_quiz: 1
@@ -40,9 +44,24 @@ class ShortA1Quiz extends React.Component {
     // placeholder - increase card number, remembered
 
     render() {
+        const cardsList = this.props.card_list
+        console.log(cardsList)
+
         return (
         <ShortA1QuizDiv>
-            <h3>Short A 1 quiz placeholder</h3>
+            <h3>Short A 1 Quiz</h3>
+            <QuizDiv>
+                {this.state.show_quiz
+                ?
+                <QuizShowingDiv>
+                    <p>Quiz is showing</p>
+                    <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
+                </QuizShowingDiv>
+                :
+                <h5 onClick={this.showQuiz}>Click here to start quiz</h5>
+                }
+
+            </QuizDiv>
         </ShortA1QuizDiv>
         )
     }
