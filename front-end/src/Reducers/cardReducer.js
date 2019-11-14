@@ -1,78 +1,59 @@
 import {
-    GET_USER_LECTURE_CARDS_START, GET_USER_LECTURE_CARDS_SUCCESS, GET_USER_LECTURE_CARDS_FAILURE,
-    GET_CARDS_FOR_QUIZ_START, GET_CARDS_FOR_QUIZ_SUCCESS, GET_CARDS_FOR_QUIZ_FAILURE,
-    GET_CURRENT_PREV_CARDS_LECTURE_SECTION_START, GET_CURRENT_PREV_CARDS_LECTURE_SECTION_SUCCESS, GET_CURRENT_PREV_CARDS_LECTURE_SECTION_FAILURE,
-
+    GET_CARDS_FOR_LECTURE_STATS_START, GET_CARDS_FOR_LECTURE_STATS_SUCCESS, GET_CARDS_FOR_LECTURE_STATS_FAILURE,
+    GET_CARDS_FOR_LECTURE_QUIZZES_START, GET_CARDS_FOR_LECTURE_QUIZZES_SUCCESS, GET_CARDS_FOR_LECTURE_QUIZZES_FAILURE,
+    
 } from '../Actions/cardActions.js';
 
 const initialCardState = {
     // There are two lists being used
-    // first is userLectureCards, all the cards for this user and lecture
-    // second is cardsForQuiz
-    // the goal is to continuously update userLectureCards and have it match the database
-    // while we use the cardsForQuiz to create individual quizzes
+    // first is cardsForStats, all the cards for this user and lecture
+    // second is cardsForQuizzes
+    // the goal is to continuously update cardsForStats and have it match the database
+    // while we use the cardsForQuizzes to create individual quizzes
     // that way we can hide cards in the quiz, without triggering a refresh of the data behind each lecture segment quiz
-    userLectureCards: [],
-    cardsForQuiz: [],
-    gettingUserLectureCards: false,
-    gettingCardsForQuiz: false,
+    cardsForStats: [],
+    cardsForQuizzes: [],
+    gettingCardsForStats: false,
+    gettingCardsForQuizzes: false,
     error: null,
 };
 
 export const cardReducer = (state = initialCardState, action) => {
     switch (action.type) {
-        case GET_USER_LECTURE_CARDS_START:
+        case GET_CARDS_FOR_LECTURE_STATS_START:
             return {
                 ...state,
-                gettingUserLectureCards: true,
+                gettingCardsForStats: true,
                 error: ''
             }
-        case GET_USER_LECTURE_CARDS_SUCCESS:
+        case GET_CARDS_FOR_LECTURE_STATS_SUCCESS:
             return {
                 ...state,
-                gettingUserLectureCards: false,
-                userLectureCards: action.payload
+                gettingCardsForStats: false,
+                cardsForStats: action.payload
             }
-        case GET_USER_LECTURE_CARDS_FAILURE:
+        case GET_CARDS_FOR_LECTURE_STATS_FAILURE:
             return {
                 ...state,
-                gettingUserLectureCards: false,
+                gettingCardsForStats: false,
                 error: action.payload
             }
-        case GET_CARDS_FOR_QUIZ_START:
+        case GET_CARDS_FOR_LECTURE_QUIZZES_START:
             return {
                 ...state,
-                gettingCardsForQuiz: true,
+                gettingCardsForQuizzes: true,
                 error: ''
             }
-        case GET_CARDS_FOR_QUIZ_SUCCESS:
+        case GET_CARDS_FOR_LECTURE_QUIZZES_SUCCESS:
             return {
                 ...state,
-                gettingCardsForQuiz: false,
-                cardsForQuiz: action.payload
+                gettingCardsForQuizzes: false,
+                cardsForQuizzes: action.payload
             }
-        case GET_CARDS_FOR_QUIZ_FAILURE:
+        case GET_CARDS_FOR_LECTURE_QUIZZES_FAILURE:
             return {
                 ...state,
-                gettingCardsForQuiz: false,
-                error: action.payload,
-            }
-        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_START:
-            return {
-                ...state,
-                gettingCardsForQuiz: true,
-                error: null
-            }
-        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_SUCCESS:
-            return {
-                ...state,
-                gettingCardsForQuiz: false,
-                cardsForQuiz: action.payload,
-            }
-        case GET_CURRENT_PREV_CARDS_LECTURE_SECTION_FAILURE:
-            return {
-                ...state,
-                gettingCardsForQuiz: false,
+                gettingCardsForQuizzes: false,
                 error: action.payload,
             }
         default:

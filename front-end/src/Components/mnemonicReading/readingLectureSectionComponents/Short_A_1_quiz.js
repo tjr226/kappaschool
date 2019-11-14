@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 // imported components, functions
-import { getCurrentPrevCardsLectureSection } from '../../../Actions';
+import { getCardsForQuizzes } from '../../../Actions';
 import CardDisplay from '../cardDisplay';
 
 // styled components
@@ -25,7 +25,7 @@ class ShortA1Quiz extends React.Component {
             lecture_id: 1,
             show_quiz: 0,
             card_number: 0,
-            card_list: [],
+            cardsForQuiz: [],
         }
         this.increaseCardNumberRemembered = this.increaseCardNumberRemembered.bind(this)
         this.increaseCardNusmberDidNotRemember = this.increaseCardNumberDidNotRemember.bind(this)
@@ -33,7 +33,7 @@ class ShortA1Quiz extends React.Component {
 
     showQuiz = e => {
         e.preventDefault();
-        this.props.getCurrentPrevCardsLectureSection(this.state.lecture_segment_id)
+        this.props.getCardsForQuizzes(this.state.lecture_id)
         this.setState({
             ...this.state,
             show_quiz: 1
@@ -57,8 +57,8 @@ class ShortA1Quiz extends React.Component {
     }
 
     render() {
-        const cardsList = this.props.card_list
-        // console.log(cardsList)
+        const cardsList = this.props.cardsForQuiz
+        console.log(cardsList)
 
         return (
             <ShortA1QuizDiv>
@@ -98,11 +98,11 @@ class ShortA1Quiz extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        card_list: state.cardReducer.cardsForQuiz
+        cardsForQuiz: state.cardReducer.cardsForQuizzes
     }
 }
 
 export default connect(
     mapStateToProps,
-    { getCurrentPrevCardsLectureSection },
+    { getCardsForQuizzes },
 )(ShortA1Quiz)

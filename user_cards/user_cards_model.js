@@ -6,10 +6,8 @@ module.exports = {
     find,
     findByUserCardId,
     findByLectureId,
-    hideCard,
     increaseCardTime,
     decreaseCardTime,
-    getCurrentAndPreviousCardsForLectureSegment,
     update,
     remove
 }
@@ -70,15 +68,6 @@ function findByUserCardId(id) {
     return db('user_cards')
         .where({ id })
         .first();
-}
-
-function getCurrentAndPreviousCardsForLectureSegment(lecture_segment_id, user_id) {
-    return db('user_cards').join('cards', 'user_cards.card_id', 'cards.id')
-        .where('user_id', user_id)
-        .where('hidden_boolean', 0)
-        .andWhere(function () {
-            this.where('lecture_segment_id', '<=', lecture_segment_id)
-        })
 }
 
 // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
