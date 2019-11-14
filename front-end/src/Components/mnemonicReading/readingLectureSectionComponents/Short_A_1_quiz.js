@@ -31,8 +31,6 @@ class ShortA1Quiz extends React.Component {
         this.increaseCardNusmberDidNotRemember = this.increaseCardNumberDidNotRemember.bind(this)
     }
 
-    // componentDidMount() {
-    //     }
     showQuiz = e => {
         e.preventDefault();
         this.props.getCurrentPrevCardsLectureSection(this.state.lecture_segment_id)
