@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 // import components
 import Login from './Components/authComponents/Login';
 import Signup from './Components/authComponents/Signup';
-import ReadingHome from './Components/readingComponents/ReadingHome.js';
-// import ReadingPractice from './Components/readingComponents/ReadingPractice.js';
 import PrivateRoute from './PrivateRoute';
 import ReadingClassPane from './Components/mnemonicReading/ReadingClassPane.js';
 
@@ -28,7 +26,6 @@ class App extends React.Component {
             <Link to="/signup">Sign Up</Link>
             </div>
         }
-        {/* <PrivateRoute exact spath="/oldReadingPractice" component={ReadingHome} /> */}
         <PrivateRoute exact path="/reading" component={ReadingClassPane} />
       </Router>
     );
