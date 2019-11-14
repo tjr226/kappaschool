@@ -27,4 +27,15 @@ router.put('/:user_card_id/increaseCardTime', (req, res) => {
         })
 })
 
+router.put('/:user_card_id/decreaseCardTime', (req, res) => {
+    const user_card_id = req.params.user_card_id;
+    UserCards.decreaseCardTime(user_card_id)
+        .then(response => {
+            res.status(200).json(response);
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+})
+
 module.exports = router;
