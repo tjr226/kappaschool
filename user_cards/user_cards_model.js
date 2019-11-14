@@ -1,3 +1,4 @@
+const moment = require('moment');
 const db = require('../data/dbConfig.js');
 
 module.exports = {
@@ -8,6 +9,8 @@ module.exports = {
     findByLectureId,
     findUnhiddenCardsByUserId,
     hideCard,
+    increaseCardTime,
+    decreaseCardTime,
     getCurrentAndPreviousCardsForLectureSegment,
     findLecturesByClassId,
     findLectureSegmentsByLectureId,
@@ -35,6 +38,33 @@ async function addLectureSegmentCardsToUser(lecture_segment_id, user_id) {
         await db('user_cards').insert(new_user_card)
     }
     return cards
+}
+
+async function increaseCardTime(user_card_id) {
+    user_card = await db('user_cards').where('id', user_card_id).first()
+    card = await db('cards').where('id', user_card.card_id).first()
+    lecture_segment = await db('lecture_segments').where('id', card.lecture_segment_id).first()
+    lecture = await db('lectures').where('id', lecture_segment.lecture_id).first()
+    class_for_card = await db('classes').where('id', lecture.class_id).first()
+    class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_card.id).first()
+    spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
+    // console.log(user_card, card, lecture_segment, lecture, class_for_card, class_spaced_repetition_pattern)
+    // console.log(spaced_repetition_days)
+    let spaced_repetition_days_array = []
+    for (i = 0; i < spaced_repetition_days.length; i++ ) {
+        spaced_repetition_days_array.push(spaced_repetition_days[i].days)
+    }
+    console.log(user_card, spaced_repetition_days_array)
+    // console.log("previous", user_card.previous_spaced_repetition_days)
+    filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day > user_card.previous_spaced_repetition_days)
+    days_to_wait = Math.min(...filtered_spaced_repetition_days)
+    console.log("days to wait", days_to_wait)
+    new_unix_timestamp = moment().add(days_to_wait, 'days').format('x');
+    return user_card
+}
+
+async function decreaseCardTime(user_card_id) {
+
 }
 
 function findByUserCardId(id) {

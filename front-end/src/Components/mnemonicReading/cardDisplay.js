@@ -16,6 +16,7 @@ class CardDisplay extends React.Component {
             <CardDisplayDiv>
                 <p>card display div showing</p>
                 {this.props.card.question}
+                {this.props.card.id}
             </CardDisplayDiv>
         )
     }
