@@ -57,9 +57,25 @@ async function increaseCardTime(user_card_id) {
     console.log(user_card, spaced_repetition_days_array)
     // console.log("previous", user_card.previous_spaced_repetition_days)
     filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day > user_card.previous_spaced_repetition_days)
-    days_to_wait = Math.min(...filtered_spaced_repetition_days)
-    console.log("days to wait", days_to_wait)
+    if (filtered_spaced_repetition_days.length > 0) {
+        days_to_wait = Math.min(...filtered_spaced_repetition_days)
+    } else {
+        days_to_wait = user_card.previous_spaced_repetition_days;
+    }
+
     new_unix_timestamp = moment().add(days_to_wait, 'days').format('x');
+
+    card_changes = {
+        previous_spaced_repetition_days: days_to_wait,
+        next_date_to_review_unix_timestamp: new_unix_timestamp
+    }
+
+    console.log(card_changes)
+    
+    new_card = update(card_changes, user_card.id, user_card.user_id)
+
+    // for first draft of this, don't return anything
+    // just focus on pushing the correct amount of time
     return user_card
 }
 
