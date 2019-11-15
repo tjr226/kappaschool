@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 // imported components, functions
 import { getCardsForQuizzes, increaseCardTime, decreaseCardTime } from '../../../Actions';
@@ -60,8 +61,12 @@ class ShortA1Quiz extends React.Component {
 
     render() {
         const cardsList = this.props.cardsForQuiz
-        // console.log(cardsList)
-
+            .filter(card => card.lecture_segment_id === this.state.lecture_segment_id)
+            .filter(card => card.next_date_to_review_unix_timestamp < moment().format('x'))
+        // cardsList.filter(card => card.lecture_segment_id === this.state.lecture_segment_id)
+        // .filter(card => card.next_date_to_review_moment_timestamp < moment().format('x'))
+        console.log(cardsList)
+    
         return (
             <ShortA1QuizDiv>
                 <h3>Short A 1 Quiz</h3>
@@ -81,7 +86,7 @@ class ShortA1Quiz extends React.Component {
                                     <RememberedButton
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}>
-                                            Remembered
+                                        Remembered
                                         </RememberedButton>
                                 </div>
                                 :
