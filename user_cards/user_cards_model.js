@@ -62,13 +62,9 @@ async function increaseCardTime(user_card_id) {
         next_date_to_review_unix_timestamp: new_unix_timestamp
     }
 
-    // console.log(card_changes)
-    
-    new_card = update(card_changes, user_card.id, user_card.user_id)
-
-    // for first draft of this, don't return anything
-    // just focus on pushing the correct amount of time
-    return user_card
+   new_card = update(card_changes, user_card.id, user_card.user_id)
+   
+   return findByLectureId(lecture.id, user_card.user_id)
 }
 
 async function decreaseCardTime(user_card_id) {
@@ -79,14 +75,10 @@ async function decreaseCardTime(user_card_id) {
     class_for_card = await db('classes').where('id', lecture.class_id).first()
     class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_card.id).first()
     spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
-    // console.log(user_card, card, lecture_segment, lecture, class_for_card, class_spaced_repetition_pattern)
-    // console.log(spaced_repetition_days)
     let spaced_repetition_days_array = []
     for (i = 0; i < spaced_repetition_days.length; i++ ) {
         spaced_repetition_days_array.push(spaced_repetition_days[i].days)
     }
-    // console.log(user_card, spaced_repetition_days_array)
-    // console.log("previous", user_card.previous_spaced_repetition_days)
     filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day < user_card.previous_spaced_repetition_days)
     if (filtered_spaced_repetition_days.length > 0) {
         days_to_wait = Math.max(...filtered_spaced_repetition_days)
@@ -100,12 +92,7 @@ async function decreaseCardTime(user_card_id) {
         previous_spaced_repetition_days: days_to_wait,
         next_date_to_review_unix_timestamp: new_unix_timestamp
     }
-
-    // console.log(card_changes)
-    
     new_card = update(card_changes, user_card.id, user_card.user_id)
 
-    // for first draft of this, don't return anything
-    // just focus on pushing the correct amount of time
-    return user_card
+    return findByLectureId(lecture.id, user_card.user_id)
 }

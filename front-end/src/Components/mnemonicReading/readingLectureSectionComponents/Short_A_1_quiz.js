@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 // imported components, functions
-import { getCardsForQuizzes } from '../../../Actions';
+import { getCardsForQuizzes, increaseCardTime, decreaseCardTime } from '../../../Actions';
 import CardDisplay from '../cardDisplay';
 
 // styled components
@@ -42,6 +42,7 @@ class ShortA1Quiz extends React.Component {
 
     increaseCardNumberDidNotRemember = user_card_id => e => {
         e.preventDefault()
+        this.props.decreaseCardTime(user_card_id)
         this.setState({
             ...this.state,
             card_number: this.state.card_number + 1
@@ -50,6 +51,7 @@ class ShortA1Quiz extends React.Component {
 
     increaseCardNumberRemembered = user_card_id => e => {
         e.preventDefault()
+        this.props.increaseCardTime(user_card_id)
         this.setState({
             ...this.state,
             card_number: this.state.card_number + 1
@@ -58,7 +60,7 @@ class ShortA1Quiz extends React.Component {
 
     render() {
         const cardsList = this.props.cardsForQuiz
-        console.log(cardsList)
+        // console.log(cardsList)
 
         return (
             <ShortA1QuizDiv>
@@ -73,12 +75,12 @@ class ShortA1Quiz extends React.Component {
                                     <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
                                     <NotRememberedButton
                                         className="btn btn-secondary"
-                                        onClick={this.increaseCardNumberDidNotRemember(cardsList[this.state.card_number].id)}>
+                                        onClick={this.increaseCardNumberDidNotRemember(cardsList[this.state.card_number].user_card_id)}>
                                         Didn't remember
                                     </NotRememberedButton>
                                     <RememberedButton
                                         className="btn btn-secondary"
-                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].id)}>
+                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}>
                                             Remembered
                                         </RememberedButton>
                                 </div>
@@ -104,5 +106,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getCardsForQuizzes },
+    { getCardsForQuizzes, increaseCardTime, decreaseCardTime },
 )(ShortA1Quiz)
