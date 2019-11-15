@@ -14,7 +14,6 @@ class CardDisplay extends React.Component {
         }
         return (
             <CardDisplayDiv>
-                <p>card display div showing</p>
                 {this.props.card.card_question}
             </CardDisplayDiv>
         )

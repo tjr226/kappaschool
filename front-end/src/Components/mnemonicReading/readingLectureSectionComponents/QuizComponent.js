@@ -8,22 +8,16 @@ import moment from 'moment';
 import { getCardsForQuizzes, increaseCardTime, decreaseCardTime } from '../../../Actions';
 import CardDisplay from '../cardDisplay';
 
-// styled components
-const ShortA1QuizDiv = styled.div``
-
-const QuizDiv = styled.div``
+const QuizComponentDiv = styled.div``
 const QuizShowingDiv = styled.div``
-
 const NotRememberedButton = styled.button``
 const RememberedButton = styled.button``
 
 
-class ShortA1Quiz extends React.Component {
+class QuizComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lecture_segment_id: 1,
-            lecture_id: 1,
             show_quiz: 0,
             card_number: 0,
             cardsForQuiz: [],
@@ -34,7 +28,7 @@ class ShortA1Quiz extends React.Component {
 
     showQuiz = e => {
         e.preventDefault();
-        this.props.getCardsForQuizzes(this.state.lecture_id)
+        this.props.getCardsForQuizzes(this.props.lecture_id)
         this.setState({
             ...this.state,
             show_quiz: 1
@@ -61,16 +55,13 @@ class ShortA1Quiz extends React.Component {
 
     render() {
         const cardsList = this.props.cardsForQuiz
-            .filter(card => card.lecture_segment_id === this.state.lecture_segment_id)
+            .filter(card => card.lecture_segment_id === this.props.lecture_segment_id)
             .filter(card => card.next_date_to_review_unix_timestamp < moment().format('x'))
-        // cardsList.filter(card => card.lecture_segment_id === this.state.lecture_segment_id)
-        // .filter(card => card.next_date_to_review_moment_timestamp < moment().format('x'))
-        console.log(cardsList)
-    
+            
         return (
-            <ShortA1QuizDiv>
-                <h3>Short A 1 Quiz</h3>
-                <QuizDiv>
+            <QuizComponentDiv>
+                <h3>{this.props.lecture_segment_name} Quiz</h3>
+                <div>
                     {this.state.show_quiz
                         ?
                         <QuizShowingDiv>
@@ -97,8 +88,8 @@ class ShortA1Quiz extends React.Component {
                         <h5 onClick={this.showQuiz}>Click here to start quiz</h5>
                     }
 
-                </QuizDiv>
-            </ShortA1QuizDiv>
+                </div>
+            </QuizComponentDiv>
         )
     }
 }
@@ -112,4 +103,6 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     { getCardsForQuizzes, increaseCardTime, decreaseCardTime },
-)(ShortA1Quiz)
+)(QuizComponent)
+
+
