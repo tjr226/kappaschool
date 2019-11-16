@@ -1,28 +1,48 @@
+// imported libraries
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-import ShortASection1 from '../readingLectureSectionComponents/Short_A_1';
-// import ShortA1Quiz from '../readingLectureSectionComponents/Short_A_1_quiz';s
-import ShortASection2 from '../readingLectureSectionComponents/Short_A_2';
+// imported components, functions
+import QuizComponent from '../readingLectureSectionComponents/QuizComponent';
+import SectionContent from '../readingLectureSectionComponents/SectionContent';
+import { getCardsForStats } from '../../../Actions';
 
-
+// styled components
 const ShortALectureDiv = styled.div``
     
 class ShortALecture extends React.Component {
-    state = {
-        lecture_id: 1
+    componentDidMount() {
+        this.props.getCardsForStats(1)
     }
-
+    
     render() {
         return (
             <ShortALectureDiv>
                 <h3>Short A Lecture placeholder</h3>
-                <ShortASection1 />
-                {/* <ShortA1Quiz /> */}
-                <ShortASection2 />
+                <SectionContent 
+                    lecture_segment_id={1}
+                    card_list={this.props.cardsForStats}
+                />
+                <QuizComponent 
+                    lecture_id={1}
+                    lecture_segment_id={1}
+                    lecture_segment_name={"Short A"}
+                />
             </ShortALectureDiv>
         )
     }
 }
 
-export default ShortALecture;
+// export default ShortALecture;
+
+const mapStateToProps = state => {
+    return {
+        cardsForStats: state.cardReducer.cardsForStats
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { getCardsForStats },
+)( ShortALecture )

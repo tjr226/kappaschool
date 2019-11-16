@@ -57,7 +57,7 @@ class QuizComponent extends React.Component {
         const cardsList = this.props.cardsForQuiz
             .filter(card => card.lecture_segment_id === this.props.lecture_segment_id)
             .filter(card => card.next_date_to_review_unix_timestamp < moment().format('x'))
-            
+
         return (
             <QuizComponentDiv>
                 <h3>{this.props.lecture_segment_name} Quiz</h3>
@@ -81,7 +81,10 @@ class QuizComponent extends React.Component {
                                         </RememberedButton>
                                 </div>
                                 :
-                                <h5>section review complete</h5>
+                                <div>
+                                    <h5>You just practiced reading {cardsList.length} words!</h5>
+                                    <h5>Great job!</h5>
+                                </div>
                             }
                         </QuizShowingDiv>
                         :

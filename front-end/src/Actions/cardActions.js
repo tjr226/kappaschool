@@ -6,7 +6,7 @@ export const GET_CARDS_FOR_LECTURE_STATS_START = 'GET_CARDS_FOR_LECTURE_STATS_ST
 export const GET_CARDS_FOR_LECTURE_STATS_SUCCESS = 'GET_CARDS_FOR_LECTURE_STATS_SUCCESS';
 export const GET_CARDS_FOR_LECTURE_STATS_FAILURE = 'GET_CARDS_FOR_LECTURE_STATS_FAILURE';
 
-export const getUserLectureCards = input => dispatch => {
+export const getCardsForStats = input => dispatch => {
     const lecture_id = input
     dispatch({ type: GET_CARDS_FOR_LECTURE_STATS_START })
     axiosWithAuth().get(`${api_prefix}/user_reading_cards/lecture/${lecture_id}`)
