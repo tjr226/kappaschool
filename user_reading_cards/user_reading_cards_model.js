@@ -11,15 +11,18 @@ module.exports = {
 function findByLectureId(lecture_id, user_id) {
     // NOTE: this query returns an object where "id" is a copy of "Lecture_id"
     // this returns all user_cards from this lecture for the user   
-    return db('user_cards')
+    return db('user_reading_cards')
         .select([
-            'user_cards.id as user_card_id', 'user_cards.user_id', 'user_cards.card_id', 'user_cards.hidden_boolean', 'user_cards.next_date_to_review_unix_timestamp',
-            'user_cards.spaced_repetition_pattern', 'user_cards.previous_spaced_repetition_days',
-            'cards.id as card_id', 'cards.question as card_question', 'cards.answer as card_answer', 'cards.lecture_segment_id as lecture_segment_id',
+            'user_reading_cards.id as user_reading_card_id', 'user_reading_cards.user_id', 'user_reading_cards.reading_card_id', 
+            'user_reading_cards.next_date_to_review_unix_timestamp', 'user_reading_cards.spaced_repetition_pattern', 
+            'user_reading_cards.previous_spaced_repetition_days',
+            'reading_cards.id as card_id', 'reading_cards.word as word', 'reading_cards.word_spaced_by_sounds as word_spaced_by_sounds',
+            'reading_cards.word_sentence_example as word_sentence_example',
+            'reading_cards.lecture_segment_id as lecture_segment_id',
             'lecture_segments.id as lecture_segment_id', 'lecture_segments.lecture_id as lecture_id'
         ])
-        .join('cards', 'user_cards.card_id', 'cards.id')
-        .join('lecture_segments', 'cards.lecture_segment_id', 'lecture_segments.id')
+        .join('reading_cards', 'user_reading_cards.reading_card_id', 'reading_cards.id')
+        .join('lecture_segments', 'reading_cards.lecture_segment_id', 'lecture_segments.id')
         .where('user_id', user_id)
         .where('lecture_id', lecture_id)
 }

@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const UserCards = require('./user_cards_model.js');
+const UserReadingCards = require('./user_reading_cards_model.js');
 
 // GET ALL CARDS FOR USER by lecture id
 router.get('/lecture/:lecture_id', (req, res) => {
     const lecture_id = req.params.lecture_id;
     const user_id = req.user.user_id
-    UserCards.findByLectureId(lecture_id, user_id)
+    UserReadingCards.findByLectureId(lecture_id, user_id)
         .then(cards => {
             res.status(200).json(cards);
         })
@@ -15,9 +15,9 @@ router.get('/lecture/:lecture_id', (req, res) => {
         })
 })
 
-router.put('/:user_card_id/increaseCardTime', (req, res) => {
-    const user_card_id = req.params.user_card_id;
-    UserCards.increaseCardTime(user_card_id)
+router.put('/:user_reading_card_id/increaseCardTime', (req, res) => {
+    const user_reading_card_id = req.params.user_reading_card_id;
+    UserReadingCards.increaseCardTime(user_reading_card_id)
         .then(response => {
             res.status(200).json(response);
         })
@@ -27,9 +27,9 @@ router.put('/:user_card_id/increaseCardTime', (req, res) => {
         })
 })
 
-router.put('/:user_card_id/decreaseCardTime', (req, res) => {
-    const user_card_id = req.params.user_card_id;
-    UserCards.decreaseCardTime(user_card_id)
+router.put('/:user_reading_card_id/decreaseCardTime', (req, res) => {
+    const user_reading_card_id = req.params.user_reading_card_id;
+    UserReadingCards.decreaseCardTime(user_reading_card_id)
         .then(response => {
             res.status(200).json(response);
         })
