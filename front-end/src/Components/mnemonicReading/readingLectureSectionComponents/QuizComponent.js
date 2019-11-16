@@ -71,12 +71,12 @@ class QuizComponent extends React.Component {
                                     <CardDisplay key={this.state.card_number} card={cardsList[this.state.card_number]} />
                                     <NotRememberedButton
                                         className="btn btn-secondary"
-                                        onClick={this.increaseCardNumberDidNotRemember(cardsList[this.state.card_number].user_card_id)}>
+                                        onClick={this.increaseCardNumberDidNotRemember(cardsList[this.state.card_number].user_reading_card_id)}>
                                         Didn't remember
                                     </NotRememberedButton>
                                     <RememberedButton
                                         className="btn btn-secondary"
-                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_card_id)}>
+                                        onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_reading_card_id)}>
                                         Remembered
                                         </RememberedButton>
                                 </div>

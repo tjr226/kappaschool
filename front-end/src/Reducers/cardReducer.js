@@ -1,8 +1,8 @@
 import {
     GET_CARDS_FOR_LECTURE_STATS_START, GET_CARDS_FOR_LECTURE_STATS_SUCCESS, GET_CARDS_FOR_LECTURE_STATS_FAILURE,
     GET_CARDS_FOR_LECTURE_QUIZZES_START, GET_CARDS_FOR_LECTURE_QUIZZES_SUCCESS, GET_CARDS_FOR_LECTURE_QUIZZES_FAILURE,
-    INCREASE_CARD_TIME_START, INCREASE_CARD_TIME_SUCCESS, INCREASE_CARD_TIME_FAILURE,
-    DECREASE_CARD_TIME_START, DECREASE_CARD_TIME_SUCCESS, DECREASE_CARD_TIME_FAILURE,
+    INCREASE_USER_READING_CARD_TIME_START, INCREASE_USER_READING_CARD_TIME_SUCCESS, INCREASE_USER_READING_CARD_TIME_FAILURE,
+    DECREASE_USER_READING_CARD_TIME_START, DECREASE_USER_READING_CARD_TIME_SUCCESS, DECREASE_USER_READING_CARD_TIME_FAILURE,
     
 } from '../Actions/cardActions.js';
 
@@ -17,8 +17,8 @@ const initialCardState = {
     cardsForQuizzes: [],
     gettingCardsForStats: false,
     gettingCardsForQuizzes: false,
-    increasingCardTime: false,
-    decreasingCardTime: false,
+    increasingUserReadingCardTime: false,
+    decreasingUserReadingCardTime: false,
     error: null,
     
 };
@@ -61,40 +61,40 @@ export const cardReducer = (state = initialCardState, action) => {
                 gettingCardsForQuizzes: false,
                 error: action.payload,
             }
-        case INCREASE_CARD_TIME_START:
+        case INCREASE_USER_READING_CARD_TIME_START:
             return {
                 ...state,
-                increasingCardTime: true,
+                increasingUserReadingCardTime: true,
                 error: null
             }
-        case INCREASE_CARD_TIME_SUCCESS:
+        case INCREASE_USER_READING_CARD_TIME_SUCCESS:
             return {
                 ...state,
-                increasingCardTime: false,
+                increasingUserReadingCardTime: false,
                 cardsForStats: action.payload
             }
-        case INCREASE_CARD_TIME_FAILURE:
+        case INCREASE_USER_READING_CARD_TIME_FAILURE:
             return {
                 ...state,
-                increasingCardTime: false,
+                increasingUserReadingCardTime: false,
                 error: action.payload
             }
-        case DECREASE_CARD_TIME_START:
+        case DECREASE_USER_READING_CARD_TIME_START:
             return {
                 ...state,
-                decreasingCardTime: true,
+                decreasingUserReadingCardTime: true,
                 error: null
             }
-        case DECREASE_CARD_TIME_SUCCESS:
+        case DECREASE_USER_READING_CARD_TIME_SUCCESS:
             return {
                 ...state,
-                decreasingCardTime: false,
+                decreasingUserReadingCardTime: false,
                 cardsForStats: action.payload
             }
-        case DECREASE_CARD_TIME_FAILURE:
+        case DECREASE_USER_READING_CARD_TIME_FAILURE:
             return {
                 ...state,
-                decreasingCardTime: false,
+                decreasingUserReadingCardTime: false,
                 error: action.payload
             }
         default:

@@ -34,6 +34,7 @@ router.put('/:user_reading_card_id/decreaseCardTime', (req, res) => {
             res.status(200).json(response);
         })
         .catch(error => {
+            console.log(error)
             res.status(500).json(error);
         })
 })

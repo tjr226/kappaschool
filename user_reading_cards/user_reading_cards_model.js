@@ -28,34 +28,32 @@ function findByLectureId(lecture_id, user_id) {
 }
 
 async function update(changes, id, user_id) {
-    await db('user_cards')
+    await db('user_reading_cards')
         .where({ id })
         .update(changes)
-    return db('user_cards')
+    return db('user_reading_cards')
         .where('user_id', user_id)
 }
 
-async function increaseCardTime(user_card_id) {
-    user_card = await db('user_cards').where('id', user_card_id).first()
-    card = await db('cards').where('id', user_card.card_id).first()
-    lecture_segment = await db('lecture_segments').where('id', card.lecture_segment_id).first()
+async function increaseCardTime(user_reading_card_id) {
+    user_reading_card = await db('user_reading_cards').where('id', user_reading_card_id).first()
+    reading_card = await db('reading_cards').where('id', user_reading_card.reading_card_id).first()
+    lecture_segment = await db('lecture_segments').where('id', reading_card.lecture_segment_id).first()
     lecture = await db('lectures').where('id', lecture_segment.lecture_id).first()
-    class_for_card = await db('classes').where('id', lecture.class_id).first()
-    class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_card.id).first()
+    class_for_reading_card = await db('classes').where('id', lecture.class_id).first()
+    class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_reading_card.id).first()
     spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
-    // console.log(user_card, card, lecture_segment, lecture, class_for_card, class_spaced_repetition_pattern)
-    // console.log(spaced_repetition_days)
+
     let spaced_repetition_days_array = []
     for (i = 0; i < spaced_repetition_days.length; i++ ) {
         spaced_repetition_days_array.push(spaced_repetition_days[i].days)
     }
-    // console.log(user_card, spaced_repetition_days_array)
-    // console.log("previous", user_card.previous_spaced_repetition_days)
-    filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day > user_card.previous_spaced_repetition_days)
+
+    filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day > user_reading_card.previous_spaced_repetition_days)
     if (filtered_spaced_repetition_days.length > 0) {
         days_to_wait = Math.min(...filtered_spaced_repetition_days)
     } else {
-        days_to_wait = user_card.previous_spaced_repetition_days;
+        days_to_wait = user_reading_card.previous_spaced_repetition_days;
     }
 
     new_unix_timestamp = moment().add(days_to_wait, 'days').subtract(8, 'hours').format('x');
@@ -65,28 +63,30 @@ async function increaseCardTime(user_card_id) {
         next_date_to_review_unix_timestamp: new_unix_timestamp
     }
 
-   new_card = update(card_changes, user_card.id, user_card.user_id)
+   new_card = update(card_changes, user_reading_card.id, user_reading_card.user_id)
    
-   return findByLectureId(lecture.id, user_card.user_id)
+   return findByLectureId(lecture.id, user_reading_card.user_id)
 }
 
-async function decreaseCardTime(user_card_id) {
-    user_card = await db('user_cards').where('id', user_card_id).first()
-    card = await db('cards').where('id', user_card.card_id).first()
-    lecture_segment = await db('lecture_segments').where('id', card.lecture_segment_id).first()
+async function decreaseCardTime(user_reading_card_id) {
+    user_reading_card = await db('user_reading_cards').where('id', user_reading_card_id).first()
+    reading_card = await db('reading_cards').where('id', user_reading_card.reading_card_id).first()
+    lecture_segment = await db('lecture_segments').where('id', reading_card.lecture_segment_id).first()
     lecture = await db('lectures').where('id', lecture_segment.lecture_id).first()
-    class_for_card = await db('classes').where('id', lecture.class_id).first()
-    class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_card.id).first()
+    class_for_reading_card = await db('classes').where('id', lecture.class_id).first()
+    class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_reading_card.id).first()
     spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
+
     let spaced_repetition_days_array = []
     for (i = 0; i < spaced_repetition_days.length; i++ ) {
         spaced_repetition_days_array.push(spaced_repetition_days[i].days)
     }
-    filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day < user_card.previous_spaced_repetition_days)
+    
+    filtered_spaced_repetition_days = spaced_repetition_days_array.filter(day => day < user_reading_card.previous_spaced_repetition_days)
     if (filtered_spaced_repetition_days.length > 0) {
         days_to_wait = Math.max(...filtered_spaced_repetition_days)
     } else {
-        days_to_wait = user_card.previous_spaced_repetition_days;
+        days_to_wait = user_reading_card.previous_spaced_repetition_days;
     }
 
     new_unix_timestamp = moment().add(days_to_wait, 'days').subtract(8, 'hours').format('x');
@@ -95,7 +95,8 @@ async function decreaseCardTime(user_card_id) {
         previous_spaced_repetition_days: days_to_wait,
         next_date_to_review_unix_timestamp: new_unix_timestamp
     }
-    new_card = update(card_changes, user_card.id, user_card.user_id)
 
-    return findByLectureId(lecture.id, user_card.user_id)
+    new_card = update(card_changes, user_reading_card.id, user_reading_card.user_id)
+   
+    return findByLectureId(lecture.id, user_reading_card.user_id)
 }

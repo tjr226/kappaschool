@@ -14,7 +14,7 @@ class CardDisplay extends React.Component {
         }
         return (
             <CardDisplayDiv>
-                {this.props.card.card_question}
+                {this.props.card.word}
             </CardDisplayDiv>
         )
     }
