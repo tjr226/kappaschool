@@ -11,7 +11,8 @@ class ReadingHome extends React.Component {
     render() {
         return(
             <ReadingHomeDiv>
-                <h3>Home placeholder</h3>
+                <h3>Let's start reading!</h3>
+                <h3>Pick a sound to practice from the side.</h3>
             </ReadingHomeDiv>
         )
     }

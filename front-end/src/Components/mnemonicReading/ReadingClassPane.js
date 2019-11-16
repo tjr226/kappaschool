@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 // import components, functions
 import ReadingHome from './ReadingHome';
-import IntroLecture from './readingLectureComponents/IntroLecture';
 import ShortALecture from './readingLectureComponents/ShortALecture';
 import ShortELecture from './readingLectureComponents/ShortELecture';
 
@@ -36,14 +35,12 @@ class ReadingClassPane extends React.Component {
                     <h1>Kappa School</h1>
                     <PageContentDiv>
                         <RouterLinksDiv>
-                            <Link to="/reading">reading</Link>
-                            <Link to="/intro">Intro to Reading</Link>
+                            <Link to="/reading">Home</Link>
                             <Link to="/shortA">Short A</Link>
                             <Link to="/shortE">Short E</Link>
                         </RouterLinksDiv>
                         <PathContentDiv>
                             <Route exact path="/reading" component={ReadingHome} />
-                            <Route exact path="/intro" component={IntroLecture} />
                             <Route exact path="/shortA" component={ShortALecture} />
                             <Route exact path="/shortE" component={ShortELecture} />
                         </PathContentDiv>
