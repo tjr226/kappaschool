@@ -63,7 +63,7 @@ export const DECREASE_USER_READING_CARD_TIME_FAILURE = 'DECREASE_USER_READING_CA
 export const decreaseCardTime = input => dispatch => {
     const user_reading_card_id = input;
     dispatch({ type: DECREASE_USER_READING_CARD_TIME_START });
-    axiosWithAuth().put(`${api_prefix}/user_cards/${user_reading_card_id}/decreaseCardTime`)
+    axiosWithAuth().put(`${api_prefix}/user_reading_cards/${user_reading_card_id}/decreaseCardTime`)
         .then(res => {
             dispatch({ type: DECREASE_USER_READING_CARD_TIME_SUCCESS, payload: res.data })
         })
