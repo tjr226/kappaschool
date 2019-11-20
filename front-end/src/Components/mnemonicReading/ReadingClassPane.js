@@ -22,8 +22,6 @@ const RouterLinksDiv = styled.div`
     width:20%;
     `
 
-
-
 const PathContentDiv = styled.div``
 
 class ReadingClassPane extends React.Component {

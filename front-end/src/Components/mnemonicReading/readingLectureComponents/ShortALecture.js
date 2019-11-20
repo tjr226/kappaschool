@@ -13,9 +13,7 @@ import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemory
 const ShortALectureDiv = styled.div`
     display:flex;`
 
-const MiddleDiv = styled.div`
-    
-`
+const MiddleDiv = styled.div``
 
 class ShortALecture extends React.Component {
     componentDidMount() {
@@ -45,8 +43,6 @@ class ShortALecture extends React.Component {
         )
     }
 }
-
-// export default ShortALecture;
 
 const mapStateToProps = state => {
     return {
