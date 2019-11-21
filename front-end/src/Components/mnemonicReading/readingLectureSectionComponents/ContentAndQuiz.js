@@ -1,12 +1,10 @@
 // imported libraries
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
 // imported components, functions
 import SectionContent from './SectionContent';
 import QuizComponent from './QuizComponent';
-// import { getCardsForStats } from '../../../Actions';
 
 // styled components
 const ContentAndQuizDiv = styled.div``

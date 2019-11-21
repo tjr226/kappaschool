@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import ReadingHome from './ReadingHome';
 import ShortALecture from './readingLectureComponents/ShortALecture';
 import ShortELecture from './readingLectureComponents/ShortELecture';
-import LectureComponent from './readingLectureComponents/LectureComponent';
+import ShortILecture from './readingLectureComponents/ShortILecture';
+import ShortOLecture from './readingLectureComponents/ShortOLecture';
+import ShortULecture from './readingLectureComponents/ShortULecture';
 
 // styled components
 const ReadingClassPaneDiv = styled.div``
@@ -37,11 +39,17 @@ class ReadingClassPane extends React.Component {
                             <Link to="/reading">Home</Link>
                             <Link to="/shortA">Short A</Link>
                             <Link to="/shortE">Short E</Link>
+                            <Link to="/shortI">Short I</Link>
+                            <Link to="/shortO">Short O</Link>
+                            <Link to="/shortU">Short U</Link>
                         </RouterLinksDiv>
                         <PathContentDiv>
                             <Route exact path="/reading" component={ReadingHome} />
                             <Route exact path="/shortA" component={ShortALecture} />
                             <Route exact path="/shortE" component={ShortELecture} />
+                            <Route exact path="/shortI" component={ShortILecture} />
+                            <Route exact path="/shortO" component={ShortOLecture} />
+                            <Route exact path="/shortU" component={ShortULecture} />
                         </PathContentDiv>
                     </PageContentDiv>
                 </ReadingClassPaneDiv>

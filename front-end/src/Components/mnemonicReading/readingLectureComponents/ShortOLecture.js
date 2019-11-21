@@ -6,13 +6,13 @@ import LectureComponent from './LectureComponent';
 
 // styled components
 
-class ShortILecture extends React.Component {
+class ShortOLecture extends React.Component {
 
     render() {
         return (
-            <LectureComponent lecture_id={3} />
+            <LectureComponent lecture_id={4} />
         )
     }
 }
 
-export default ShortILecture;
+export default ShortOLecture;
