@@ -11,6 +11,7 @@ class WordContent extends React.Component {
     render() {
         return(
             <WordContentDiv>
+                <p>word content div here</p>
                 {this.props.card.word}
                 <br />
                 {this.props.card.word_spaced_by_sounds}

@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 // imported components, functions
 import QuizComponent from '../readingLectureSectionComponents/QuizComponent';
 import SectionContent from '../readingLectureSectionComponents/SectionContent';
-import { getCardsForStats, getSectionsByLecture } from '../../../Actions';
+import LectureComponent from './LectureComponent';
+// import { getCardsForStats, getSectionsByLecture } from '../../../Actions';
 import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemoryGraph';
 import ContentAndQuiz from '../readingLectureSectionComponents/ContentAndQuiz';
 
@@ -18,48 +19,26 @@ const MiddleDiv = styled.div``
 
 class ShortALecture extends React.Component {
     componentDidMount() {
-        this.props.getCardsForStats(1)
-        this.props.getSectionsByLecture(1)
+        // this.props.getCardsForStats(1)
+        // this.props.getSectionsByLecture(1)
     }
 
     render() {
         return (
-            <ShortALectureDiv>
-                <MiddleDiv>
 
-                    <h3>Short A Lecture placeholder</h3>
-                    {/* NOTE: using cardsForStats to display content, this is probably temporary */}
-
-                    <ContentAndQuiz
-                        lecture_id={1}
-                        lecture_segment_id={1}
-                        card_list={this.props.cardsForStats}
-                        lecture_segment_name={"Short A 1"}
-
-                    />
-                    {/* <SectionContent
-                        lecture_segment_id={1}
-                        card_list={this.props.cardsForStats}
-                    />
-                    <QuizComponent
-                        lecture_id={1}
-                        lecture_segment_id={1}
-                        lecture_segment_name={"Short A"}
-                    /> */}
-                </MiddleDiv>
-                <ReadingMemoryGraph />
-            </ShortALectureDiv>
+            <LectureComponent lecture_id={1} />
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        cardsForStats: state.cardReducer.cardsForStats
-    }
-}
+export default ShortALecture;
+// const mapStateToProps = state => {
+//     return {
+//         cardsForStats: state.cardReducer.cardsForStats
+//     }
+// }
 
-export default connect(
-    mapStateToProps,
-    { getCardsForStats, getSectionsByLecture },
-)(ShortALecture)
+// export default connect(
+//     mapStateToProps,
+//     // { getCardsForStats, getSectionsByLecture },
+// )(ShortALecture)

@@ -25,15 +25,15 @@ exports.up = function (knex) {
                 .unsigned()
                 .notNullable()
         })
-        .createTable('lecture_segments', lecture_segments => {
-            lecture_segments.increments();
-            lecture_segments.string('lecture_segment_name').notNullable();
-            lecture_segments.integer('lecture_id')
+        .createTable('lecture_sections', lecture_sections => {
+            lecture_sections.increments();
+            lecture_sections.string('lecture_section_name').notNullable();
+            lecture_sections.integer('lecture_id')
                 .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('lectures')
-            lecture_segments.integer('order_in_lecture')
+            lecture_sections.integer('order_in_lecture')
                 .unsigned()
                 .notNullable()
         })
@@ -41,22 +41,22 @@ exports.up = function (knex) {
             question_cards.increments()
             question_cards.string('question').notNullable();
             question_cards.string('answer').notNullable();
-            question_cards.integer('lecture_segment_id')
+            question_cards.integer('lecture_section_id')
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('lecture_segments');
+                .inTable('lecture_sections');
         })
         .createTable('reading_cards', reading_cards => {
             reading_cards.increments()
             reading_cards.string('word').notNullable();
             reading_cards.string('word_spaced_by_sounds').notNullable();
             reading_cards.string('word_sentence_example', 512).notNullable();
-            reading_cards.integer('lecture_segment_id')
+            reading_cards.integer('lecture_section_id')
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('lecture_segments');
+                .inTable('lecture_sections');
         })
         .createTable('spaced_repetition_patterns', patterns => {
             patterns.increments();
@@ -155,7 +155,7 @@ exports.down = function (knex) {
         .dropTableIfExists('spaced_repetition_patterns')
         .dropTableIfExists('reading_cards')
         .dropTableIfExists('question_cards')
-        .dropTableIfExists('lecture_segments')
+        .dropTableIfExists('lecture_sections')
         .dropTableIfExists('lectures')
         .dropTableIfExists('classes')
         .dropTableIfExists('users')

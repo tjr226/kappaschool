@@ -55,12 +55,12 @@ class QuizComponent extends React.Component {
 
     render() {
         const cardsList = this.props.cardsForQuiz
-            .filter(card => card.lecture_segment_id === this.props.lecture_segment_id)
+            .filter(card => card.lecture_section_id === this.props.lecture_section_id)
             .filter(card => card.next_date_to_review_unix_timestamp < moment().format('x'))
 
         return (
             <QuizComponentDiv>
-                <h3>{this.props.lecture_segment_name} Quiz</h3>
+                <h3>{this.props.lecture_section_name} Quiz</h3>
                 <div>
                     {this.state.show_quiz
                         ?

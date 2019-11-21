@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import ReadingHome from './ReadingHome';
 import ShortALecture from './readingLectureComponents/ShortALecture';
 import ShortELecture from './readingLectureComponents/ShortELecture';
+import LectureComponent from './readingLectureComponents/LectureComponent';
 
 // styled components
 const ReadingClassPaneDiv = styled.div``

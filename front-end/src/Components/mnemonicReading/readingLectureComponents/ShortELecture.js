@@ -28,13 +28,13 @@ class ShortELecture extends React.Component {
                 <MiddleDiv>
                     <h3>Short E Lecture placeholder</h3>
                     <SectionContent
-                        lecture_segment_id={6}
+                        lecture_section_id={6}
                         card_list={this.props.cardsForStats}
                     />
                     <QuizComponent
                         lecture_id={2}
-                        lecture_segment_id={6}
-                        lecture_segment_name={"Short E"}
+                        lecture_section_id={6}
+                        lecture_section_name={"Short E"}
                     />
                 </MiddleDiv>
                 <ReadingMemoryGraph />

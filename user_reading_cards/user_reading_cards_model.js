@@ -19,17 +19,17 @@ function findByLectureId(lecture_id, user_id) {
             'user_reading_cards.previous_spaced_repetition_days',
             'reading_cards.id as card_id', 'reading_cards.word as word', 'reading_cards.word_spaced_by_sounds as word_spaced_by_sounds',
             'reading_cards.word_sentence_example as word_sentence_example',
-            'reading_cards.lecture_segment_id as lecture_segment_id',
-            'lecture_segments.id as lecture_segment_id', 'lecture_segments.lecture_id as lecture_id'
+            'reading_cards.lecture_section_id as lecture_section_id',
+            'lecture_sections.id as lecture_section_id', 'lecture_sections.lecture_id as lecture_id'
         ])
         .join('reading_cards', 'user_reading_cards.reading_card_id', 'reading_cards.id')
-        .join('lecture_segments', 'reading_cards.lecture_segment_id', 'lecture_segments.id')
+        .join('lecture_sections', 'reading_cards.lecture_section_id', 'lecture_sections.id')
         .where('user_id', user_id)
         .where('lecture_id', lecture_id)
 }
 
 function findSectionsByLecture(lecture_id) {
-    return db('lecture_segments')
+    return db('lecture_sections')
         .where('lecture_id', lecture_id)
         .orderBy('order_in_lecture')
 }
@@ -45,8 +45,8 @@ async function update(changes, id, user_id) {
 async function increaseCardTime(user_reading_card_id) {
     user_reading_card = await db('user_reading_cards').where('id', user_reading_card_id).first()
     reading_card = await db('reading_cards').where('id', user_reading_card.reading_card_id).first()
-    lecture_segment = await db('lecture_segments').where('id', reading_card.lecture_segment_id).first()
-    lecture = await db('lectures').where('id', lecture_segment.lecture_id).first()
+    lecture_section = await db('lecture_sections').where('id', reading_card.lecture_section_id).first()
+    lecture = await db('lectures').where('id', lecture_section.lecture_id).first()
     class_for_reading_card = await db('classes').where('id', lecture.class_id).first()
     class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_reading_card.id).first()
     spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
@@ -78,8 +78,8 @@ async function increaseCardTime(user_reading_card_id) {
 async function decreaseCardTime(user_reading_card_id) {
     user_reading_card = await db('user_reading_cards').where('id', user_reading_card_id).first()
     reading_card = await db('reading_cards').where('id', user_reading_card.reading_card_id).first()
-    lecture_segment = await db('lecture_segments').where('id', reading_card.lecture_segment_id).first()
-    lecture = await db('lectures').where('id', lecture_segment.lecture_id).first()
+    lecture_section = await db('lecture_sections').where('id', reading_card.lecture_section_id).first()
+    lecture = await db('lectures').where('id', lecture_section.lecture_id).first()
     class_for_reading_card = await db('classes').where('id', lecture.class_id).first()
     class_spaced_repetition_pattern = await db('class_spaced_repetition_pattern').where('class_id', class_for_reading_card.id).first()
     spaced_repetition_days = await db('spaced_repetition_pattern_days').where('spaced_repetition_pattern', class_spaced_repetition_pattern.id)
