@@ -10,7 +10,6 @@ const SectionContentDiv = styled.div``
 
 class SectionContent extends React.Component {
     render() {
-        console.log("section content props", this.props)
         const card_list = this.props.card_list
             .filter(card => card.lecture_section_id === this.props.lecture_section_id)
         if (!this.props.lecture_section_id) {
@@ -18,7 +17,7 @@ class SectionContent extends React.Component {
         }
         return (
             <SectionContentDiv>
-                <p>section content passing through</p>
+                <h1>{this.props.lecture_section_name}</h1>
                 {card_list.map(card => <WordContent key={card.user_reading_card_id} card={card} />)}
             </SectionContentDiv>
         )

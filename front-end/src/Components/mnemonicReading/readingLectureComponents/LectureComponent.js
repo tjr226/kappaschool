@@ -9,7 +9,9 @@ import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemory
 import ContentAndQuiz from '../readingLectureSectionComponents/ContentAndQuiz';
 
 // styled components
-const LectureDiv = styled.div``
+const LectureDiv = styled.div`
+    display:flex,
+    `
 const MiddleDiv = styled.div``
 
 class LectureComponent extends React.Component {
@@ -30,7 +32,7 @@ class LectureComponent extends React.Component {
                         key={lecture_section.id}
                         lecture_id={lecture_section.lecture_id}
                         lecture_section_id={lecture_section.id}
-                        lecture_section_name={lecture_section.lecture_segment_name}
+                        lecture_section_name={lecture_section.lecture_section_name}
                         card_list={this.props.cardsForStats}
                     />
                     )}

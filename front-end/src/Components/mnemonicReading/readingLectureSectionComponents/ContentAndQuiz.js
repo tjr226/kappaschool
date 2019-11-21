@@ -13,16 +13,12 @@ const ContentAndQuizDiv = styled.div``
 
 class ContentAndQuiz extends React.Component {
     render() {
-        // console.log("content and quiz props", this.props)
-        // if (!this.props.lecture_section_id) {
-        //     return (<div></div>)
-        // }
         return (
             <ContentAndQuizDiv>
                 <SectionContent
                     lecture_section_id={this.props.lecture_section_id}
-                    card_list={this.props.card_list}
                     lecture_section_name={this.props.lecture_section_name}
+                    card_list={this.props.card_list}
                 />
                 <QuizComponent
                     lecture_id={this.props.lecture_id}
