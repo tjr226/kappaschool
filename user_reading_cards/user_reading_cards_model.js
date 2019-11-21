@@ -5,6 +5,7 @@ module.exports = {
     findByLectureId,
     increaseCardTime,
     decreaseCardTime,
+    findSectionsByLecture,
     update
 }
 
@@ -25,6 +26,12 @@ function findByLectureId(lecture_id, user_id) {
         .join('lecture_segments', 'reading_cards.lecture_segment_id', 'lecture_segments.id')
         .where('user_id', user_id)
         .where('lecture_id', lecture_id)
+}
+
+function findSectionsByLecture(lecture_id) {
+    return db('lecture_segments')
+        .where('lecture_id', lecture_id)
+        .orderBy('order_in_lecture')
 }
 
 async function update(changes, id, user_id) {
