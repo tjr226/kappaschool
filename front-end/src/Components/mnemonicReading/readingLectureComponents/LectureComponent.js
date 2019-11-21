@@ -6,39 +6,27 @@ import { connect } from 'react-redux';
 // imported components, functions
 import QuizComponent from '../readingLectureSectionComponents/QuizComponent';
 import SectionContent from '../readingLectureSectionComponents/SectionContent';
-import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemoryGraph';
 import { getCardsForStats } from '../../../Actions';
+import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemoryGraph';
 
 
-// styled components
-const ShortELectureDiv = styled.div`
-    display:flex;`
-
+// 
+const LectureDiv = styled.div``
 const MiddleDiv = styled.div``
 
-
-class ShortELecture extends React.Component {
+class LectureComponent extends React.Component {
     componentDidMount() {
-        this.props.getCardsForStats(2)
+        this.props.getCardsForStats(this.props.lecture_id)
     }
 
     render() {
         return (
-            <ShortELectureDiv>
+            <LectureDiv>
                 <MiddleDiv>
-                    <h3>Short E Lecture placeholder</h3>
-                    <SectionContent
-                        lecture_segment_id={6}
-                        card_list={this.props.cardsForStats}
-                    />
-                    <QuizComponent
-                        lecture_id={2}
-                        lecture_segment_id={6}
-                        lecture_segment_name={"Short E"}
-                    />
+                    
                 </MiddleDiv>
                 <ReadingMemoryGraph />
-            </ShortELectureDiv>
+            </LectureDiv>
         )
     }
 }
@@ -47,9 +35,9 @@ const mapStateToProps = state => {
     return {
         cardsForStats: state.cardReducer.cardsForStats
     }
-};
+}
 
 export default connect(
     mapStateToProps,
     { getCardsForStats },
-)(ShortELecture);
+)(LectureComponent)

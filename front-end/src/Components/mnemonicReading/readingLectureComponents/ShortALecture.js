@@ -8,6 +8,7 @@ import QuizComponent from '../readingLectureSectionComponents/QuizComponent';
 import SectionContent from '../readingLectureSectionComponents/SectionContent';
 import { getCardsForStats } from '../../../Actions';
 import ReadingMemoryGraph from '../readingLectureSectionComponents/ReadingMemoryGraph';
+import ContentAndQuiz from '../readingLectureSectionComponents/ContentAndQuiz';
 
 // styled components
 const ShortALectureDiv = styled.div`
@@ -28,7 +29,14 @@ class ShortALecture extends React.Component {
                     <h3>Short A Lecture placeholder</h3>
                     {/* NOTE: using cardsForStats to display content, this is probably temporary */}
 
-                    <SectionContent
+                    <ContentAndQuiz
+                        lecture_id={1}
+                        lecture_segment_id={1}
+                        card_list={this.props.cardsForStats}
+                        lecture_segment_name={"Short A 1"}
+
+                    />
+                    {/* <SectionContent
                         lecture_segment_id={1}
                         card_list={this.props.cardsForStats}
                     />
@@ -36,7 +44,7 @@ class ShortALecture extends React.Component {
                         lecture_id={1}
                         lecture_segment_id={1}
                         lecture_segment_name={"Short A"}
-                    />
+                    /> */}
                 </MiddleDiv>
                 <ReadingMemoryGraph />
             </ShortALectureDiv>
