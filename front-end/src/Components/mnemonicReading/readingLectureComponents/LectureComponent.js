@@ -11,8 +11,13 @@ import ContentAndQuiz from '../readingLectureSectionComponents/ContentAndQuiz';
 // styled components
 const LectureDiv = styled.div`
     display:flex,
+    width:100%;
+    align-items:flex-start;
+    justify-content:space-between;
     `
-const MiddleDiv = styled.div``
+
+const MiddleDiv = styled.div`
+    `
 
 class LectureComponent extends React.Component {
     componentDidMount() {

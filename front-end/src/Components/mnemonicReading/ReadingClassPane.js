@@ -17,15 +17,22 @@ const ReadingClassPaneDiv = styled.div``
 // PageContent is everything but header
 const PageContentDiv = styled.div`
     display:flex;
+    width:100%;
     `
 
+// Lecture materials and Stats sidebar
+const PathContentDiv = styled.div`
+    display:flex;
+    flex-direction:row;
+    width: 100%;
+    `
+
+// Router links sidebar
 const RouterLinksDiv = styled.div`
     display:flex;
     flex-direction:column;
     width:20%;
     `
-
-const PathContentDiv = styled.div``
 
 class ReadingClassPane extends React.Component {
 

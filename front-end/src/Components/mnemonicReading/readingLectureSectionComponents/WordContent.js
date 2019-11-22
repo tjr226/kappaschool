@@ -5,7 +5,10 @@ import styled from 'styled-components';
 // imported components, functions
 
 // styled components
-const WordContentDiv = styled.div``
+const WordContentDiv = styled.div`
+    font-size:6.5rem;
+    padding:100px 0px;
+`
 
 class WordContent extends React.Component {
     render() {

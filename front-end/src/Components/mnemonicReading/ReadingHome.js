@@ -5,7 +5,9 @@ import styled from 'styled-components';
 // imported components, functions
 
 // styled components
-const ReadingHomeDiv = styled.div``
+const ReadingHomeDiv = styled.div`
+    width:100%;    
+`
 
 class ReadingHome extends React.Component {
     render() {

@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 
 // styled components
 const ReadingMemoryGraphDiv = styled.div`
-    display:flex;
-    justify-content:flex-end;
     `
 
 class ReadingMemoryGraph extends React.Component {
