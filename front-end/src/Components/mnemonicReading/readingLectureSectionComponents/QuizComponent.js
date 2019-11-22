@@ -8,10 +8,23 @@ import moment from 'moment';
 import { getCardsForQuizzes, increaseCardTime, decreaseCardTime } from '../../../Actions';
 import CardDisplay from '../cardDisplay';
 
-const QuizComponentDiv = styled.div``
+const QuizComponentDiv = styled.div`
+    font-size:6.5rem;
+    padding:150px 0px;
+`
 const QuizShowingDiv = styled.div``
-const NotRememberedButton = styled.button``
-const RememberedButton = styled.button``
+const NotRememberedButton = styled.button`
+    font-size:6rem;
+    width:300px;
+    background-color: purple;
+    `
+
+const RememberedButton = styled.button`
+    font-size:6rem
+    width:300px;
+    margin-left:50px;
+    background-color: green;
+    `
 
 
 class QuizComponent extends React.Component {
@@ -72,18 +85,18 @@ class QuizComponent extends React.Component {
                                     <NotRememberedButton
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberDidNotRemember(cardsList[this.state.card_number].user_reading_card_id)}>
-                                        Didn't remember
+                                        ◴
                                     </NotRememberedButton>
                                     <RememberedButton
                                         className="btn btn-secondary"
                                         onClick={this.increaseCardNumberRemembered(cardsList[this.state.card_number].user_reading_card_id)}>
-                                        Remembered
+                                        ✓
                                         </RememberedButton>
                                 </div>
                                 :
                                 <div>
-                                    <h5>You just practiced reading {cardsList.length} words!</h5>
-                                    <h5>Great job!</h5>
+                                    <p>You just practiced reading {cardsList.length} words!</p>
+                                    <p>Great job!</p>
                                 </div>
                             }
                         </QuizShowingDiv>
